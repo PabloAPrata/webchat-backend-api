@@ -1,9 +1,8 @@
 package com.pabloprata.backend.webchat.domain;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -13,22 +12,21 @@ import java.time.LocalDateTime;
 public class State {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "states_id")
-    private Integer stateId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "state_id")
+    private Long stateId;
 
-    @NotBlank(message = "Nome do estado é obrigatório.")
-    @Size(max = 100, message = "Nome do estado pode ter no máximo 100 caracteres.")
+    @Column(name = "name", nullable = false, length = 100)
     private String name;
 
-    @NotBlank(message = "UF do estado é obrigatório.")
-    @Size(min = 2, max = 2, message = "UF deve ter 2 caracteres.")
+    @Column(name = "uf", nullable = false, length = 2)
     private String uf;
 
-    @ManyToOne
-    @JoinColumn(name = "fk_country_id", referencedColumnName = "country_id", nullable = false)
-    private Integer fkCountryId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_country_id", nullable = false)
+    private Country country;
 
-    @Column(name = "created_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    @CreationTimestamp
+    @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
 }

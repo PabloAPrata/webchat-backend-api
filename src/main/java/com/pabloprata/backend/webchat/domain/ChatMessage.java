@@ -1,6 +1,5 @@
 package com.pabloprata.backend.webchat.domain;
 
-import com.pabloprata.backend.webchat.domain.enums.TypeMessageEnum;
 import lombok.*;
 import jakarta.persistence.*;
 
@@ -14,7 +13,7 @@ public class ChatMessage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "chat_message_id")
-    private Integer chatMessageId;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "fk_meeting_id", nullable = false)
@@ -30,9 +29,9 @@ public class ChatMessage {
     @Column(name = "created_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Timestamp createdAt;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "type_message", nullable = false)
-    private TypeMessageEnum typeMessage = TypeMessageEnum.TEXT;
+    @ManyToOne
+    @JoinColumn(name = "type_message_id", nullable = false)
+    private TypeMessage typeMessage;
 
     @Column(name = "file_uri")
     private String fileUri;

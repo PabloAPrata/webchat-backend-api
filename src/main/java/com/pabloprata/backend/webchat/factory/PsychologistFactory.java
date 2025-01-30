@@ -2,50 +2,61 @@ package com.pabloprata.backend.webchat.factory;
 
 import com.pabloprata.backend.webchat.DTOs.PsychologistResponseDTO;
 import com.pabloprata.backend.webchat.DTOs.PsychologistSignUpDTO;
+import com.pabloprata.backend.webchat.domain.Gender;
 import com.pabloprata.backend.webchat.domain.Psychologist;
 import com.pabloprata.backend.webchat.domain.User;
-import org.springframework.security.crypto.password.PasswordEncoder;
+//import org.springframework.security.crypto.password.PasswordEncoder;
+import com.pabloprata.backend.webchat.repository.GenderRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import java.time.LocalDate;
 
 
 @Component
 public class PsychologistFactory {
 
-    public Psychologist convertDtoToEntity(PsychologistSignUpDTO dto, PasswordEncoder passwordEncoder) {
-        User user = new User();
-        user.setName(dto.firstName() + " " + dto.lastName());
-        user.setCpf(dto.cpf());
-        user.setTelephone(dto.phoneNumber());
-        user.setEmail(dto.email());
-        user.setGender(User.Gender.valueOf(dto.gender()));
-        user.setPassword(passwordEncoder.encode(dto.password()));
+    @Autowired
+    private GenderRepository genderRepository;
+//    public Psychologist convertDtoToEntity(PsychologistSignUpDTO dto, PasswordEncoder passwordEncoder) {
+    public Psychologist convertDtoToEntity(PsychologistSignUpDTO dto) {
 
-        Psychologist psychologist = new Psychologist();
-        psychologist.setUser(user);
-        psychologist.setCrp(dto.crp());
+    Gender gender = genderRepository.findById(Long.valueOf(dto.genderId()))
+            .orElseThrow(() -> new IllegalArgumentException("Gender não encontrado!"));
 
-        return psychologist;
-    }
+    User user = new User();
+    user.setName(dto.firstName() + " " + dto.middleName() + " " + dto.lastName());
+    user.setCpf(dto.cpf());
+    user.setTelephone(dto.phoneNumber());
+    user.setEmail(dto.email());
+    user.setGender(gender);
+
+    user.setPassword(dto.password());
+
+    Psychologist psychologist = new Psychologist();
+    psychologist.setUser(user);
+    psychologist.setCrp(dto.crp());
+
+    return psychologist;
+}
+
 
     public PsychologistResponseDTO convertEntityToResponse (Psychologist psychologist) {
 
         String fullName = psychologist.getUser().getName();
         String[] nameParts = fullName.split(" ", 3);
 
-        String firstName = nameParts.length > 0 ? nameParts[0] : "";
-        String middleName =  nameParts.length > 1 ? nameParts[1] : "";
-        String lastName = nameParts.length > 1 ? nameParts[2] : "";
+        int nameLength = nameParts.length;
+
+        String firstName = nameLength > 0 ? nameParts[0] : "";
+        String lastName = nameLength > 1 ? nameParts[nameLength - 1] : "";
 
         return new PsychologistResponseDTO(
                 psychologist.getUser().getUserId(),
                 firstName,
-                middleName,
                 lastName,
                 psychologist.getCrp(),
                 psychologist.getUser().getTelephone(),
                 psychologist.getUser().getEmail(),
-                psychologist.getUser().getCreated_at()
+                psychologist.getUser().getCreatedAt()
         );
     }
 }

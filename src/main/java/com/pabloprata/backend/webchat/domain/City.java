@@ -13,9 +13,9 @@ import java.time.LocalDateTime;
 public class City {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "country_id")
-    private Integer city_id;
+    private Long id;
 
     @NotBlank(message = "Nome da cidade é obrigatório.")
     @Size(max = 100, message = "Nome da cidade pode ter no máximo 100 caracteres.")

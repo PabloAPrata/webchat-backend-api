@@ -1,23 +1,26 @@
 package com.pabloprata.backend.webchat.domain;
 
-import jakarta.persistence.EmbeddedId;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.JoinColumn;
-import lombok.Data;
+import jakarta.persistence.*;
+import lombok.*;
 
-@Data
 @Entity
+@Table(name = "user_role")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserRole {
 
     @EmbeddedId
-    private UserRoleId id;
+    private UserRoleId id; // Chave composta embutida
 
     @ManyToOne
-    @JoinColumn(name = "fk_user_id", referencedColumnName = "user_id", insertable = false, updatable = false)
+    @MapsId("userId")
+    @JoinColumn(name = "fk_user_id", referencedColumnName = "user_id")
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "fk_role_id", referencedColumnName = "role_id", insertable = false, updatable = false)
+    @MapsId("roleId")
+    @JoinColumn(name = "fk_role_id", referencedColumnName = "role_id")
     private Role role;
 }
+

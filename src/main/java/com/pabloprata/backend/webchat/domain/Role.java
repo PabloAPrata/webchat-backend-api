@@ -1,28 +1,27 @@
 package com.pabloprata.backend.webchat.domain;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import lombok.Data;
+import lombok.*;
+import java.time.LocalDateTime;
 
-import java.util.Date;
-
-@Data
 @Entity
-@Table(name = "role")
+@Table(name = "roles")
+@Data  // Lombok generates getters, setters, toString, equals, and hashCode methods
+@NoArgsConstructor  // Lombok generates a no-args constructor
+@AllArgsConstructor // Lombok generates a constructor with all fields
 public class Role {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "role_id")
     private Integer roleId;
 
-    @Column(length = 50, unique = true, nullable = false)
-    @NotBlank(message = "Nome é obrigatório.")
+    @Column(name = "name", unique = true, nullable = false, length = 50)
     private String name;
 
-    @Column(length = 100, nullable = false)
+    @Column(name = "description", nullable = false, length = 100)
     private String description;
 
-    @Column(name = "created_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private Date created_at;
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private LocalDateTime createdAt = LocalDateTime.now();
 }

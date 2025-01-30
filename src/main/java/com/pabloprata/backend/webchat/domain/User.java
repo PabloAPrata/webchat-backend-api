@@ -3,8 +3,10 @@ package com.pabloprata.backend.webchat.domain;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.UUID;
 
@@ -15,14 +17,13 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "user_id")
+    @Column(name = "user_id", columnDefinition = "UUID DEFAULT gen_random_uuid()")
     private UUID userId;
 
-    @Column(nullable = false, length = 100)
-    @NotBlank(message = "Nome é obrigatório.")
+    @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, length = 14)
     @Pattern(regexp = "^\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}$", message = "CPF deve estar no formato xxx.xxx.xxx-xx")
     @NotBlank(message = "CPF é obrigatório.")
     private String cpf;
@@ -31,7 +32,7 @@ public class User {
     @Column(unique = true)
     private String telephone;
 
-    @Column(name = "name", unique = true, nullable = false)
+    @Column(name = "email", unique = true, nullable = false)
     @NotBlank(message = "Email é obrigatório.")
     @Email(message = "Formato de email inválido.")
     private String email;
@@ -46,14 +47,13 @@ public class User {
     @Column(name = "date_birth")
     private Date dateBirth;
 
-    @Enumerated(EnumType.STRING)
     @NotNull(message = "Gênero é obrigatório.")
+    @ManyToOne
+    @JoinColumn(name = "fk_gender_id", nullable = false)
     private Gender gender;
 
-    @Column(name = "created_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private LocalDate created_at;
+    @CreationTimestamp
+    @Column(name = "created_at", updatable = false)
+    private LocalDateTime createdAt;
 
-    public enum Gender {
-        M, F, O
-    }
 }

@@ -4,24 +4,25 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
 @Entity
-@Table(name = "permission")
+@Table(name = "permissions")
 public class Permission {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "permission_id")
     private Integer permissionId;
 
-    @Column(length = 50, nullable = false)
-    @NotBlank(message = "Nome é obrigatório.")
+    @Column(name = "name", nullable = false, length = 50)
     private String name;
 
+    @Column(name = "description", columnDefinition = "TEXT")
     private String description;
 
-    @Column(name = "created_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private Date created_at;
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private LocalDateTime createdAt = LocalDateTime.now();
 }

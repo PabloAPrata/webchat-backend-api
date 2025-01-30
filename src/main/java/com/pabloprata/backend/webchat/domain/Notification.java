@@ -1,6 +1,5 @@
 package com.pabloprata.backend.webchat.domain;
 
-import com.pabloprata.backend.webchat.domain.enums.TypeNotificationEnum;
 import lombok.*;
 import jakarta.persistence.*;
 
@@ -14,7 +13,7 @@ public class Notification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "notification_id")
-    private Integer notificationId;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "fk_user_id", nullable = false)
@@ -24,9 +23,9 @@ public class Notification {
     @JoinColumn(name = "fk_chat_message_id")
     private ChatMessage chatMessage;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "type_notification", nullable = false)
-    private TypeNotificationEnum typeNotification;
+    @ManyToOne
+    @JoinColumn(name = "type_notification_id", nullable = false)
+    private TypeNotification typeNotification;
 
     @Column(name = "created_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Timestamp createdAt;

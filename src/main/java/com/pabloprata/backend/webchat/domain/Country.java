@@ -1,12 +1,10 @@
 package com.pabloprata.backend.webchat.domain;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import lombok.Data;
-
-import java.sql.Date;
+import org.hibernate.annotations.CreationTimestamp;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Entity
@@ -14,14 +12,17 @@ import java.time.LocalDateTime;
 public class Country {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "country_id")
-    private Integer countryId;
+    private Long countryId;
 
-    @NotBlank(message = "Nome do país é obrigatório.")
-    @Size(max = 100, message = "Nome do país pode ter no máximo 100 caracteres.")
+    @Column(name = "name", nullable = false, length = 100)
     private String name;
 
-    @Column(name = "created_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    @CreationTimestamp
+    @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
+
+    @OneToMany(mappedBy = "country", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<State> states;
 }

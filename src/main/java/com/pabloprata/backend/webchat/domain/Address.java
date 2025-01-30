@@ -15,37 +15,33 @@ import java.util.UUID;
 public class Address {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "address_id")
-    private Integer addressId;
+    private Long addressId;
 
     @ManyToOne
-    @JoinColumn(name = "fk_user_id", referencedColumnName = "user_id", nullable = false)
+    @JoinColumn(name = "fk_user_id", nullable = false)
     private User user;
 
-    @NotBlank(message = "Rua é obrigatória.")
-    @Size(max = 255, message = "Nome da rua pode ter no máximo 255 caracteres.")
+    @Column(name = "street", nullable = false, length = 255)
     private String street;
 
-    @NotBlank(message = "Número é obrigatório.")
-    @Size(max = 10, message = "Número pode ter no máximo 10 caracteres.")
+    @Column(name = "number", nullable = false, length = 10)
     private String number;
 
-    @Size(max = 100, message = "Complemento pode ter no máximo 100 caracteres.")
+    @Column(name = "complement", length = 100)
     private String complement;
 
-    @NotBlank(message = "Bairro é obrigatório.")
-    @Size(max = 100, message = "Bairro pode ter no máximo 100 caracteres.")
+    @Column(name = "district", nullable = false, length = 100)
     private String district;
 
-    @NotBlank(message = "CEP é obrigatório.")
-    @Size(max = 20, message = "CEP pode ter no máximo 20 caracteres.")
+    @Column(name = "zip_code", nullable = false, length = 20)
     private String zipCode;
 
     @ManyToOne
-    @JoinColumn(name = "fk_city_id", referencedColumnName = "city_id", nullable = false)
+    @JoinColumn(name = "fk_city_id", nullable = false)
     private City city;
 
-    @Column(name = "created_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private LocalDateTime createdAt;
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private LocalDateTime createdAt = LocalDateTime.now();
 }
