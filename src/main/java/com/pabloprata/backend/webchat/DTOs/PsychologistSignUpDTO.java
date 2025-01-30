@@ -1,4 +1,4 @@
-package com.pabloprata.backend.webchat.dto;
+package com.pabloprata.backend.webchat.DTOs;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -10,6 +10,10 @@ public record PsychologistSignUpDTO(
         @NotBlank(message = "O nome não pode estar vazio.")
         @Size(min = 3, max = 50, message = "O nome precisa ter entre 3 e 50 caracteres.")
         String firstName,
+
+        @NotBlank(message = "O nome do meio não pode estar vazio.")
+        @Size(min = 3, max = 50, message = "O nome do meio precisa ter entre 2 e 50 caracteres.")
+        String middleName,
 
         @NotBlank(message = "O último nome não pode estar vazio.")
         @Size(min = 3, max = 50, message = "O último nome precisa ter entre 3 e 50 caracteres.")

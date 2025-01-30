@@ -1,4 +1,4 @@
-package com.pabloprata.backend.webchat.dto;
+package com.pabloprata.backend.webchat.DTOs;
 
 import java.util.UUID;
 
