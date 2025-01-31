@@ -11,9 +11,9 @@ import java.time.LocalDate;
 public class Patient {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "patient_id")
-    private Integer patientId;
+    private Long patientId;
 
     @ManyToOne
     @JoinColumn(name = "fk_user_id", referencedColumnName = "user_id", nullable = false, unique = true)

@@ -16,7 +16,7 @@ public class PsychologistFactory {
 
     @Autowired
     private GenderRepository genderRepository;
-//    public Psychologist convertDtoToEntity(PsychologistSignUpDTO dto, PasswordEncoder passwordEncoder) {
+
     public Psychologist convertDtoToEntity(PsychologistSignUpDTO dto) {
 
     Gender gender = genderRepository.findById(Long.valueOf(dto.genderId()))
@@ -29,11 +29,10 @@ public class PsychologistFactory {
     user.setEmail(dto.email());
     user.setGender(gender);
 
-    user.setPassword(dto.password());
-
     Psychologist psychologist = new Psychologist();
     psychologist.setUser(user);
     psychologist.setCrp(dto.crp());
+    psychologist.setPassword(dto.password());
 
     return psychologist;
 }

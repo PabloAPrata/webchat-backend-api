@@ -2,11 +2,16 @@ package com.pabloprata.backend.webchat.DTOs;
 
 import jakarta.validation.constraints.*;
 import org.hibernate.validator.constraints.br.CPF;
-
 import java.util.Date;
+import java.util.UUID;
 
-public record PsychologistSignUpDTO(
-        @NotBlank(message = "O primeiro nome não pode estar vazio.")
+
+public record PatientSignUpDTO(
+
+        @NotNull(message = "É necessário informar a qual psicólogo pertence este usuário")
+        UUID PsychologistId,
+
+        @NotBlank(message = "O nome não pode estar vazio.")
         @Size(min = 2, max = 50, message = "O nome precisa ter entre 2 e 50 caracteres.")
         String firstName,
 
@@ -21,26 +26,16 @@ public record PsychologistSignUpDTO(
         @CPF
         String cpf,
 
-        @NotBlank(message = "O CRP não pode estar vazio.")
-        @Pattern(regexp = "^[A-Z]{2}/\\d{4,5}(-\\d{1,2})?$\n",
-                        message = "Digite um CRP válido.")
-        String crp,
-
-        @NotBlank(message = "O telefone não pode estar vazio.")
+        @NotBlank(message = "O nome não pode estar vazio.")
         String phoneNumber,
 
         @NotBlank(message = "Email é requerido.")
-        @Email(message = "Email no formato errado.")
+        @Email(message = "Invalid email format")
         String email,
 
         Date dateBirth,
 
         @NotNull(message = "O gênero não pode estar vazio.")
-        Integer genderId,
-
-        @NotBlank(message = "A senha não pode estar vazia.")
-        @Size(min = 8, message = "A senha deve ter pelo menos 8 caracteres")
-        @Pattern(regexp = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[!@#$%^&*]).{8,}$",
-                message = "A senha deve conter pelo menos 1 letra maiúscula, 1 letra minúscula, 1 número e 1 caractere especial")
-        String password)
-{}
+        Integer genderId
+) {
+}

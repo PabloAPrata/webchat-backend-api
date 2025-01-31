@@ -8,8 +8,8 @@ import com.pabloprata.backend.webchat.domain.Psychologist;
 import com.pabloprata.backend.webchat.repository.PsychologistRepository;
 import com.pabloprata.backend.webchat.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -17,9 +17,9 @@ public class PsychologistService {
 
     private final PsychologistRepository psychologistRepository;
     private final UserRepository userRepository;
-//    private final PasswordEncoder passwordEncoder;
     private final PsychologistFactory factory;
 
+    @Transactional
     public PsychologistResponseDTO signup(PsychologistSignUpDTO dto) {
 
         Psychologist psychologist = factory.convertDtoToEntity(dto);

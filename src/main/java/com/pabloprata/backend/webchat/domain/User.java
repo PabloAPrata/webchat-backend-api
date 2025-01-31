@@ -37,10 +37,6 @@ public class User {
     @Email(message = "Formato de email inválido.")
     private String email;
 
-    @NotBlank(message = "Senha é obrigatória.")
-    @Size(min = 8, message = "A senha deve ter pelo menos 8 caracteres.")
-    private String password;
-
     @Column(name = "profile_img")
     private String profileImg;
 
