@@ -10,5 +10,5 @@ import java.util.UUID;
 
 @Repository
 public interface PatientRepository extends JpaRepository<Patient, Long> {
-//    List<Patient> findByPsychologist_User_Id(UUID psychologistUserId);
+    List<Patient> findByPsychologist_User_UserId(UUID psychologistUserId);
 }
