@@ -12,12 +12,13 @@ import com.pabloprata.backend.webchat.repository.PatientRepository;
 import com.pabloprata.backend.webchat.repository.PsychologistRepository;
 import com.pabloprata.backend.webchat.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
+
 
 @Service
 @RequiredArgsConstructor
@@ -43,13 +44,11 @@ public class PsychologistService {
         return psychologistFactory.convertEntityToResponse(psychologist);
     }
 
-    public List<PatientResponseDTO> getPatientsByPsychologist(UUID psychologistId) {
+    public Page<PatientResponseDTO> getPatientsByPsychologist(UUID psychologistId, Pageable pagination) {
 
-        List<Patient> patientsEntity = patientRepository.findByPsychologist_User_UserId(psychologistId);
+        Page<Patient> patientsPage = patientRepository.findByPsychologist_User_UserId(psychologistId, pagination);
 
-        return patientsEntity.stream()
-                .map(patientFactory::convertEntityToResponse)
-                .toList();
+        return patientsPage.map(patientFactory::convertEntityToResponse);
     }
 
 }
