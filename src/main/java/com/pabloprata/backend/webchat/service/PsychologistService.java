@@ -1,6 +1,6 @@
 package com.pabloprata.backend.webchat.service;
 
-import com.pabloprata.backend.webchat.DTOs.PsychologistResponseDTO;
+import com.pabloprata.backend.webchat.DTOs.PsychologistCreatedDTO;
 import com.pabloprata.backend.webchat.DTOs.PsychologistSignUpDTO;
 import com.pabloprata.backend.webchat.domain.User;
 import com.pabloprata.backend.webchat.factory.PsychologistFactory;
@@ -20,7 +20,7 @@ public class PsychologistService {
     private final PsychologistFactory factory;
 
     @Transactional
-    public PsychologistResponseDTO signup(PsychologistSignUpDTO dto) {
+    public PsychologistCreatedDTO signup(PsychologistSignUpDTO dto) {
 
         Psychologist psychologist = factory.convertDtoToEntity(dto);
 
@@ -32,5 +32,7 @@ public class PsychologistService {
 
         return factory.convertEntityToResponse(psychologist);
     }
+
+    public void getPatientsByPsychologist() {}
 
 }

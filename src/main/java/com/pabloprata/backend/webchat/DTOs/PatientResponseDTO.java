@@ -1,19 +1,20 @@
 package com.pabloprata.backend.webchat.DTOs;
 
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 public record PatientResponseDTO(
-        UUID PsychologistId,
+        UUID id,
 
-        String firstName,
+        String name,
 
-        String lastName,
+        String cpf,
 
         String phoneNumber,
 
         String email,
 
-        LocalDateTime createdAt
+        String image,
+
+        String dateBirth
 ) {
 }

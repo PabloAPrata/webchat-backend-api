@@ -1,15 +1,13 @@
 package com.pabloprata.backend.webchat.factory;
 
-import com.pabloprata.backend.webchat.DTOs.PatientResponseDTO;
+import com.pabloprata.backend.webchat.DTOs.PatientCreatedDTO;
 import com.pabloprata.backend.webchat.DTOs.PatientSignUpDTO;
 import com.pabloprata.backend.webchat.domain.Gender;
 import com.pabloprata.backend.webchat.domain.Patient;
-import com.pabloprata.backend.webchat.domain.Psychologist;
 import com.pabloprata.backend.webchat.domain.User;
 import com.pabloprata.backend.webchat.repository.GenderRepository;
 import com.pabloprata.backend.webchat.repository.PsychologistRepository;
 import com.pabloprata.backend.webchat.repository.UserRepository;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -51,7 +49,7 @@ public class PatientFactory {
         return patient;
     }
 
-    public PatientResponseDTO convertEntityToResponse(Patient patient) {
+    public PatientCreatedDTO convertEntityToResponse(Patient patient) {
 
         String fullName = patient.getUser().getName();
         String[] nameParts = fullName.split(" ", 3);
@@ -61,7 +59,7 @@ public class PatientFactory {
         String firstName = nameLength > 0 ? nameParts[0] : "";
         String lastName = nameLength > 1 ? nameParts[nameLength - 1] : "";
 
-        return new PatientResponseDTO(
+        return new PatientCreatedDTO(
                 patient.getUser().getUserId(),
                 firstName,
                 lastName,

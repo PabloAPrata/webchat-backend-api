@@ -28,7 +28,7 @@ public class User {
     @NotBlank(message = "CPF é obrigatório.")
     private String cpf;
 
-    @Pattern(regexp = "^\\+55\\s?\\(?\\d{2}\\)?\\s?\\d{4,5}-?\\d{4}$", message = "Telefone inválido.")
+    @Pattern(regexp = "^\\+\\d{1,3}\\s?\\(?\\d{1,4}\\)?\\s?\\d{4,5}-?\\d{4}$", message = "Telefone inválido.")
     @Column(unique = true)
     private String telephone;
 

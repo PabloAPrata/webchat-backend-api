@@ -1,6 +1,6 @@
 package com.pabloprata.backend.webchat.service;
 
-import com.pabloprata.backend.webchat.DTOs.PatientResponseDTO;
+import com.pabloprata.backend.webchat.DTOs.PatientCreatedDTO;
 import com.pabloprata.backend.webchat.DTOs.PatientSignUpDTO;
 import com.pabloprata.backend.webchat.domain.Patient;
 import com.pabloprata.backend.webchat.domain.Psychologist;
@@ -24,7 +24,7 @@ public class PatientService {
     private final PatientFactory factory;
 
     @Transactional
-    public PatientResponseDTO signup(PatientSignUpDTO dto) {
+    public PatientCreatedDTO signup(PatientSignUpDTO dto) {
 
         Patient patient = factory.convertDtoToEntity(dto);
 

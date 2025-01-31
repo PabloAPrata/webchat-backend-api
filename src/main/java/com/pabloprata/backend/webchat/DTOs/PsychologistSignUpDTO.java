@@ -22,7 +22,7 @@ public record PsychologistSignUpDTO(
         String cpf,
 
         @NotBlank(message = "O CRP não pode estar vazio.")
-        @Pattern(regexp = "^[A-Z]{2}/\\d{4,5}(-\\d{1,2})?$\n",
+        @Pattern(regexp = "^[A-Z]{2}/\\d{4,5}(-\\d{1,2})?$",
                         message = "Digite um CRP válido.")
         String crp,
 

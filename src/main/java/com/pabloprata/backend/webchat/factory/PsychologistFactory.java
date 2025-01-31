@@ -1,6 +1,6 @@
 package com.pabloprata.backend.webchat.factory;
 
-import com.pabloprata.backend.webchat.DTOs.PsychologistResponseDTO;
+import com.pabloprata.backend.webchat.DTOs.PsychologistCreatedDTO;
 import com.pabloprata.backend.webchat.DTOs.PsychologistSignUpDTO;
 import com.pabloprata.backend.webchat.domain.Gender;
 import com.pabloprata.backend.webchat.domain.Psychologist;
@@ -38,7 +38,7 @@ public class PsychologistFactory {
 }
 
 
-    public PsychologistResponseDTO convertEntityToResponse (Psychologist psychologist) {
+    public PsychologistCreatedDTO convertEntityToResponse (Psychologist psychologist) {
 
         String fullName = psychologist.getUser().getName();
         String[] nameParts = fullName.split(" ", 3);
@@ -48,7 +48,7 @@ public class PsychologistFactory {
         String firstName = nameLength > 0 ? nameParts[0] : "";
         String lastName = nameLength > 1 ? nameParts[nameLength - 1] : "";
 
-        return new PsychologistResponseDTO(
+        return new PsychologistCreatedDTO(
                 psychologist.getUser().getUserId(),
                 firstName,
                 lastName,

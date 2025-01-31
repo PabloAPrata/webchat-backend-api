@@ -1,17 +1,21 @@
 package com.pabloprata.backend.webchat.controller;
 
-import com.pabloprata.backend.webchat.DTOs.PatientResponseDTO;
+import com.pabloprata.backend.webchat.DTOs.PatientCreatedDTO;
 import com.pabloprata.backend.webchat.DTOs.PatientSignUpDTO;
-import com.pabloprata.backend.webchat.DTOs.PsychologistResponseDTO;
+import com.pabloprata.backend.webchat.DTOs.PsychologistCreatedDTO;
 import com.pabloprata.backend.webchat.DTOs.PsychologistSignUpDTO;
 import com.pabloprata.backend.webchat.service.PatientService;
 import com.pabloprata.backend.webchat.service.PsychologistService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
 
 @RestController
 @RequestMapping("/signup")
@@ -24,12 +28,31 @@ public class SignupController {
     private PatientService patientService;
 
     @PostMapping("/psychologist")
-    public PsychologistResponseDTO createPsychologist(@Valid @RequestBody PsychologistSignUpDTO dto) {
-        return psychologistService.signup(dto);
+    public ResponseEntity<PsychologistCreatedDTO> createPsychologist(@Valid @RequestBody PsychologistSignUpDTO dto) {
+
+        PsychologistCreatedDTO psychologistCreatedDTO = psychologistService.signup(dto);
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(psychologistCreatedDTO.id())
+                .toUri();
+
+
+        return ResponseEntity.created(location).body(psychologistCreatedDTO );
     }
 
     @PostMapping("/patient")
-    public PatientResponseDTO createPatients(@Valid @RequestBody PatientSignUpDTO dto) {
-        return patientService.signup(dto);
+    public ResponseEntity<PatientCreatedDTO> createPatients(@Valid @RequestBody PatientSignUpDTO dto) {
+
+        PatientCreatedDTO patientCreatedDTO = patientService.signup(dto);
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(patientCreatedDTO.id())
+                .toUri();
+
+        return ResponseEntity.created(location).body(patientCreatedDTO);
     }
 }
