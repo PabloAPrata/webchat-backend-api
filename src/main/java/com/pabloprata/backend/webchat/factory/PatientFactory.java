@@ -1,7 +1,7 @@
 package com.pabloprata.backend.webchat.factory;
 
 import com.pabloprata.backend.webchat.DTOs.PatientCreatedDTO;
-import com.pabloprata.backend.webchat.DTOs.PatientResponseDTO;
+import com.pabloprata.backend.webchat.DTOs.UserResponseDTO;
 import com.pabloprata.backend.webchat.DTOs.PatientSignUpDTO;
 import com.pabloprata.backend.webchat.domain.Gender;
 import com.pabloprata.backend.webchat.domain.Patient;
@@ -62,11 +62,11 @@ public class PatientFactory {
         );
     }
 
-    public PatientResponseDTO convertEntityToResponse(Patient patient) {
+    public UserResponseDTO convertEntityToResponse(Patient patient) {
 
         String dateBirth = (patient.getUser().getDateBirth() != null) ? patient.getUser().getDateBirth().toString() : null;
 
-        return new PatientResponseDTO(
+        return new UserResponseDTO(
                 patient.getUser().getUserId(),
                 patient.getUser().getName(),
                 patient.getUser().getCpf(),

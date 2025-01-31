@@ -1,6 +1,6 @@
 package com.pabloprata.backend.webchat.service;
 
-import com.pabloprata.backend.webchat.DTOs.PatientResponseDTO;
+import com.pabloprata.backend.webchat.DTOs.UserResponseDTO;
 import com.pabloprata.backend.webchat.DTOs.PsychologistCreatedDTO;
 import com.pabloprata.backend.webchat.DTOs.PsychologistSignUpDTO;
 import com.pabloprata.backend.webchat.domain.Patient;
@@ -44,7 +44,7 @@ public class PsychologistService {
         return psychologistFactory.convertEntityToResponse(psychologist);
     }
 
-    public Page<PatientResponseDTO> getPatientsByPsychologist(UUID psychologistId, Pageable pagination) {
+    public Page<UserResponseDTO> getPatientsByPsychologist(UUID psychologistId, Pageable pagination) {
 
         Page<Patient> patientsPage = patientRepository.findByPsychologist_User_UserId(psychologistId, pagination);
 

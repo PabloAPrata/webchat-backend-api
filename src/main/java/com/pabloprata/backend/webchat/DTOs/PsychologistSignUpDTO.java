@@ -42,5 +42,5 @@ public record PsychologistSignUpDTO(
         @Size(min = 8, message = "A senha deve ter pelo menos 8 caracteres")
         @Pattern(regexp = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[!@#$%^&*]).{8,}$",
                 message = "A senha deve conter pelo menos 1 letra maiúscula, 1 letra minúscula, 1 número e 1 caractere especial")
-        String password)
-{}
+        String password
+) {}

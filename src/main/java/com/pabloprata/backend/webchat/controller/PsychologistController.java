@@ -1,6 +1,6 @@
 package com.pabloprata.backend.webchat.controller;
 
-import com.pabloprata.backend.webchat.DTOs.PatientResponseDTO;
+import com.pabloprata.backend.webchat.DTOs.UserResponseDTO;
 import com.pabloprata.backend.webchat.service.PsychologistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -22,8 +22,8 @@ public class PsychologistController {
     private PsychologistService service;
 
     @GetMapping("/{psychologistUserId}/patients")
-    public ResponseEntity<Page<PatientResponseDTO>> getPatientsByPsychologist(@PathVariable UUID psychologistUserId, @PageableDefault(sort = "name") Pageable pagination) {
-        Page<PatientResponseDTO> patientsPage = service.getPatientsByPsychologist(psychologistUserId, pagination);
+    public ResponseEntity<Page<UserResponseDTO>> getPatientsByPsychologist(@PathVariable UUID psychologistUserId, @PageableDefault(sort = "name") Pageable pagination) {
+        Page<UserResponseDTO> patientsPage = service.getPatientsByPsychologist(psychologistUserId, pagination);
         return ResponseEntity.ok(patientsPage);
     }
 }

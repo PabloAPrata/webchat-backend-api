@@ -2,7 +2,7 @@ package com.pabloprata.backend.webchat.DTOs;
 
 import java.util.UUID;
 
-public record PatientResponseDTO(
+public record UserResponseDTO(
         UUID id,
 
         String name,

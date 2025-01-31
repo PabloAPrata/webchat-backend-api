@@ -19,16 +19,16 @@ public class Address {
     @JoinColumn(name = "fk_user_id", nullable = false)
     private User user;
 
-    @Column(name = "street", nullable = false)
+    @Column(nullable = false)
     private String street;
 
     @Column(name = "number", nullable = false, length = 10)
     private String number;
 
-    @Column(name = "complement", length = 100)
+    @Column(length = 100)
     private String complement;
 
-    @Column(name = "district", nullable = false, length = 100)
+    @Column(nullable = false, length = 100)
     private String district;
 
     @Column(name = "zip_code", nullable = false, length = 20)
