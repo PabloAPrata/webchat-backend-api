@@ -26,7 +26,7 @@ public class PatientService {
     @Transactional
     public PatientCreatedDTO signup(PatientSignUpDTO dto) {
 
-        Patient patient = factory.convertDtoToEntity(dto);
+        Patient patient = factory.convertSignupDtoToEntity(dto);
 
         User savedUser = userRepository.save(patient.getUser());
 
@@ -39,7 +39,7 @@ public class PatientService {
 
         patientRepository.save(patient);
 
-        return factory.convertEntityToResponse(patient);
+        return factory.convertEntityToCreatedDto(patient);
     }
 
 

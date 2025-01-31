@@ -12,16 +12,16 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.UUID;
 
-//@RestController
-//@RequestMapping("/psychologist")
-//public class PsychologistController {
-//
-//    @Autowired
-//    private PsychologistService service;
-//
-//    @GetMapping("/{psychologistUserId}/patients")
-//    public ResponseEntity<List<PatientResponseDTO>> getPatientsByPsychologist(@PathVariable UUID psychologistUserId) {
-//        List<PatientResponseDTO> patients = service.getPatientsByPsychologist(psychologistUserId);
-//        return ResponseEntity.ok(patients);
-//    }
-//}
+@RestController
+@RequestMapping("/psychologist")
+public class PsychologistController {
+
+    @Autowired
+    private PsychologistService service;
+
+    @GetMapping("/{psychologistUserId}/patients")
+    public ResponseEntity<List<PatientResponseDTO>> getPatientsByPsychologist(@PathVariable UUID psychologistUserId) {
+        List<PatientResponseDTO> patients = service.getPatientsByPsychologist(psychologistUserId);
+        return ResponseEntity.ok(patients);
+    }
+}

@@ -1,6 +1,7 @@
 package com.pabloprata.backend.webchat.factory;
 
 import com.pabloprata.backend.webchat.DTOs.PatientCreatedDTO;
+import com.pabloprata.backend.webchat.DTOs.PatientResponseDTO;
 import com.pabloprata.backend.webchat.DTOs.PatientSignUpDTO;
 import com.pabloprata.backend.webchat.domain.Gender;
 import com.pabloprata.backend.webchat.domain.Patient;
@@ -23,7 +24,7 @@ public class PatientFactory {
     @Autowired
     private PsychologistRepository psychologistRepository;
 
-    public Patient convertDtoToEntity(PatientSignUpDTO dto) {
+    public Patient convertSignupDtoToEntity(PatientSignUpDTO dto) {
 
         Gender gender = genderRepository.findById(Long.valueOf(dto.genderId()))
                 .orElseThrow(() -> new IllegalArgumentException("Gender não encontrado!"));
@@ -35,21 +36,13 @@ public class PatientFactory {
         user.setEmail(dto.email());
         user.setGender(gender);
 
-//        user = userRepository.save(user);
-
         Patient patient = new Patient();
         patient.setUser(user);
-
-//        Psychologist psychologist = psychologistRepository.findByUserUserId(user.getUserId())
-//                .orElseThrow(() -> new EntityNotFoundException("Psicólogo não encontrado para o usuário com ID: " + user.getUserId()));
-
-//        patient.setPsychologist(psychologist);
-
 
         return patient;
     }
 
-    public PatientCreatedDTO convertEntityToResponse(Patient patient) {
+    public PatientCreatedDTO convertEntityToCreatedDto(Patient patient) {
 
         String fullName = patient.getUser().getName();
         String[] nameParts = fullName.split(" ", 3);
@@ -66,6 +59,21 @@ public class PatientFactory {
                 patient.getUser().getTelephone(),
                 patient.getUser().getEmail(),
                 patient.getUser().getCreatedAt()
+        );
+    }
+
+    public PatientResponseDTO convertEntityToResponse(Patient patient) {
+
+        String dateBirth = (patient.getUser().getDateBirth() != null) ? patient.getUser().getDateBirth().toString() : null;
+
+        return new PatientResponseDTO(
+                patient.getUser().getUserId(),
+                patient.getUser().getName(),
+                patient.getUser().getCpf(),
+                patient.getUser().getTelephone(),
+                patient.getUser().getEmail(),
+                patient.getUser().getProfileImg(),
+                dateBirth
         );
     }
 }
