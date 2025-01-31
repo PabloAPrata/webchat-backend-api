@@ -1,13 +1,9 @@
 package com.pabloprata.backend.webchat.domain;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.UUID;
 
 @Data
 @Entity
@@ -23,7 +19,7 @@ public class Address {
     @JoinColumn(name = "fk_user_id", nullable = false)
     private User user;
 
-    @Column(name = "street", nullable = false, length = 255)
+    @Column(name = "street", nullable = false)
     private String street;
 
     @Column(name = "number", nullable = false, length = 10)

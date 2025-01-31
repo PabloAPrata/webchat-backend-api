@@ -5,6 +5,7 @@ import com.pabloprata.backend.webchat.service.PsychologistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,7 +22,7 @@ public class PsychologistController {
     private PsychologistService service;
 
     @GetMapping("/{psychologistUserId}/patients")
-    public ResponseEntity<Page<PatientResponseDTO>> getPatientsByPsychologist(@PathVariable UUID psychologistUserId, Pageable pagination) {
+    public ResponseEntity<Page<PatientResponseDTO>> getPatientsByPsychologist(@PathVariable UUID psychologistUserId, @PageableDefault(sort = "name") Pageable pagination) {
         Page<PatientResponseDTO> patientsPage = service.getPatientsByPsychologist(psychologistUserId, pagination);
         return ResponseEntity.ok(patientsPage);
     }

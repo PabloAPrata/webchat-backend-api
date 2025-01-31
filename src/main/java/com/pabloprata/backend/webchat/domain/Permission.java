@@ -1,11 +1,10 @@
 package com.pabloprata.backend.webchat.domain;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.util.Date;
+
 
 @Data
 @Entity
