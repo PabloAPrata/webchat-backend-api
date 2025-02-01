@@ -22,7 +22,7 @@ public class PsychologistController {
     private PsychologistService service;
 
     @GetMapping("/{psychologistUserId}/patients")
-    public ResponseEntity<Page<UserResponseDTO>> getPatientsByPsychologist(@PathVariable UUID psychologistUserId, @PageableDefault(sort = "name") Pageable pagination) {
+    public ResponseEntity<Page<UserResponseDTO>> getPatientsByPsychologist(@PathVariable UUID psychologistUserId, @PageableDefault(sort = "user.name") Pageable pagination) {
         Page<UserResponseDTO> patientsPage = service.getPatientsByPsychologist(psychologistUserId, pagination);
         return ResponseEntity.ok(patientsPage);
     }
