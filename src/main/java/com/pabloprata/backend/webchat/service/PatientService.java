@@ -14,6 +14,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.UUID;
+
+
 @Service
 @RequiredArgsConstructor
 public class PatientService {
@@ -28,10 +31,11 @@ public class PatientService {
 
         Patient patient = factory.convertSignupDtoToEntity(dto);
 
+        patient.setPatientStatus("ativo");
+
         User savedUser = userRepository.save(patient.getUser());
 
-        Psychologist psychologist = psychologistRepository.findByUserUserId(dto.PsychologistId())
-                .orElseThrow(() -> new EntityNotFoundException("Psicólogo não encontrado para o usuário com ID: " + savedUser.getUserId()));
+        Psychologist psychologist = psychologistRepository.findByUserUserId(dto.PsychologistId()).orElseThrow(() -> new EntityNotFoundException("Psicólogo não encontrado para o usuário com ID: " + savedUser.getUserId()));
 
         patient.setPsychologist(psychologist);
 
@@ -42,5 +46,22 @@ public class PatientService {
         return factory.convertEntityToCreatedDto(patient);
     }
 
+    @Transactional
+    public void updatePatientStatus(UUID userId, String newStatus) {
+
+        Patient patient = patientRepository.findByUser_UserId(userId)
+                .orElseThrow(() -> new EntityNotFoundException("Paciente não encontrado para o usuário ID: " + userId));
+
+        if (!isValidStatus(newStatus)) {
+            throw new IllegalArgumentException("Status inválido: " + newStatus);
+        }
+
+        patient.setPatientStatus(newStatus);
+        patientRepository.save(patient);
+    }
+
+    private boolean isValidStatus(String status) {
+        return status.equals("ativo") || status.equals("acompanhamento") || status.equals("finalizado");
+    }
 
 }

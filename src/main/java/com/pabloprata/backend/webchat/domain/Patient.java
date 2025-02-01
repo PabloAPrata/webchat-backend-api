@@ -3,7 +3,7 @@ package com.pabloprata.backend.webchat.domain;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -23,9 +23,17 @@ public class Patient {
     @JoinColumn(name = "fk_psychologist_id", referencedColumnName = "psychologist_id", nullable = false)
     private Psychologist psychologist;
 
+
+    @Column(name = "patient_status", length = 50, nullable = false)
+    private String patientStatus;
+
     @Column(name = "end_date")
-    private LocalDate endDate;
+    private LocalDateTime endDate;
 
     @Column(name = "created_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
-    private LocalDate createdAt;
+    private LocalDateTime createdAt = java.time.LocalDateTime.now();
+
 }
+
+
+

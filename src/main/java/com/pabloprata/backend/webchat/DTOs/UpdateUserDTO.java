@@ -2,7 +2,6 @@ package com.pabloprata.backend.webchat.DTOs;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 import java.util.Date;
@@ -18,11 +17,11 @@ public record UpdateUserDTO(
 
         String image,
 
-        @Pattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$")
         Date dateBirth,
 
         @NotBlank(message = "O telefone não pode estar vazio.")
         String phoneNumber,
+
 
         @NotBlank(message = "Email é requerido.")
         @Email(message = "Email no formato errado.")
