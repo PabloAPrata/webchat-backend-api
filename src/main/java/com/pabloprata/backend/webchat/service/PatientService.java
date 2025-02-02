@@ -49,8 +49,7 @@ public class PatientService {
     @Transactional
     public void updatePatientStatus(UUID userId, String newStatus) {
 
-        Patient patient = patientRepository.findByUser_UserId(userId)
-                .orElseThrow(() -> new EntityNotFoundException("Paciente não encontrado para o usuário ID: " + userId));
+        Patient patient = patientRepository.findByUser_UserId(userId).orElseThrow(() -> new EntityNotFoundException("Paciente não encontrado para o usuário ID: " + userId));
 
         if (!isValidStatus(newStatus)) {
             throw new IllegalArgumentException("Status inválido: " + newStatus);
@@ -59,6 +58,7 @@ public class PatientService {
         patient.setPatientStatus(newStatus);
         patientRepository.save(patient);
     }
+
 
     private boolean isValidStatus(String status) {
         return status.equals("ativo") || status.equals("acompanhamento") || status.equals("finalizado");
