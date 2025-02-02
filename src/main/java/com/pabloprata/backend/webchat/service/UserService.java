@@ -1,6 +1,6 @@
 package com.pabloprata.backend.webchat.service;
 
-import com.pabloprata.backend.webchat.DTOs.UpdateUserDTO;
+import com.pabloprata.backend.webchat.dto.UpdateUserDTO;
 import com.pabloprata.backend.webchat.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;

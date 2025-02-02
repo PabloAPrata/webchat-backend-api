@@ -1,7 +1,7 @@
 package com.pabloprata.backend.webchat.factory;
 
-import com.pabloprata.backend.webchat.DTOs.PsychologistCreatedDTO;
-import com.pabloprata.backend.webchat.DTOs.PsychologistSignUpDTO;
+import com.pabloprata.backend.webchat.dto.PsychologistCreatedDTO;
+import com.pabloprata.backend.webchat.dto.PsychologistSignUpDTO;
 import com.pabloprata.backend.webchat.domain.Gender;
 import com.pabloprata.backend.webchat.domain.Psychologist;
 import com.pabloprata.backend.webchat.domain.User;

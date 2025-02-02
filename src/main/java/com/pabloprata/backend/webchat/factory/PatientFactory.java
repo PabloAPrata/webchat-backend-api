@@ -1,8 +1,8 @@
 package com.pabloprata.backend.webchat.factory;
 
-import com.pabloprata.backend.webchat.DTOs.PatientCreatedDTO;
-import com.pabloprata.backend.webchat.DTOs.UserResponseDTO;
-import com.pabloprata.backend.webchat.DTOs.PatientSignUpDTO;
+import com.pabloprata.backend.webchat.dto.PatientCreatedDTO;
+import com.pabloprata.backend.webchat.dto.UserResponseDTO;
+import com.pabloprata.backend.webchat.dto.PatientSignUpDTO;
 import com.pabloprata.backend.webchat.domain.Gender;
 import com.pabloprata.backend.webchat.domain.Patient;
 import com.pabloprata.backend.webchat.domain.User;

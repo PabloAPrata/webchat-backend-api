@@ -1,6 +1,6 @@
 package com.pabloprata.backend.webchat.controller;
 
-import com.pabloprata.backend.webchat.DTOs.UpdateUserDTO;
+import com.pabloprata.backend.webchat.dto.UpdateUserDTO;
 import com.pabloprata.backend.webchat.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

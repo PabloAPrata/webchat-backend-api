@@ -1,6 +1,6 @@
 package com.pabloprata.backend.webchat.controller;
 
-import com.pabloprata.backend.webchat.DTOs.PatientStatusUpdateDTO;
+import com.pabloprata.backend.webchat.dto.PatientStatusUpdateDTO;
 import com.pabloprata.backend.webchat.service.PatientService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;

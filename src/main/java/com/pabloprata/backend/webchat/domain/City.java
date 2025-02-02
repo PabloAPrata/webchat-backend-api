@@ -14,7 +14,7 @@ public class City {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "country_id")
+    @Column(name = "city_id")
     private Long id;
 
     @NotBlank(message = "Nome da cidade é obrigatório.")

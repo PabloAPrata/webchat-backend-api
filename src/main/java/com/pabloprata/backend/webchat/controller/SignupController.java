@@ -1,9 +1,9 @@
 package com.pabloprata.backend.webchat.controller;
 
-import com.pabloprata.backend.webchat.DTOs.PatientCreatedDTO;
-import com.pabloprata.backend.webchat.DTOs.PatientSignUpDTO;
-import com.pabloprata.backend.webchat.DTOs.PsychologistCreatedDTO;
-import com.pabloprata.backend.webchat.DTOs.PsychologistSignUpDTO;
+import com.pabloprata.backend.webchat.dto.PatientCreatedDTO;
+import com.pabloprata.backend.webchat.dto.PatientSignUpDTO;
+import com.pabloprata.backend.webchat.dto.PsychologistCreatedDTO;
+import com.pabloprata.backend.webchat.dto.PsychologistSignUpDTO;
 import com.pabloprata.backend.webchat.service.PatientService;
 import com.pabloprata.backend.webchat.service.PsychologistService;
 import jakarta.validation.Valid;
@@ -34,7 +34,7 @@ public class SignupController {
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
-                .path("/{id}")
+                .path("/psychologist/{id}")
                 .buildAndExpand(psychologistCreatedDTO.id())
                 .toUri();
 

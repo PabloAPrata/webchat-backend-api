@@ -1,8 +1,9 @@
 package com.pabloprata.backend.webchat.service;
 
-import com.pabloprata.backend.webchat.DTOs.UserResponseDTO;
-import com.pabloprata.backend.webchat.DTOs.PsychologistCreatedDTO;
-import com.pabloprata.backend.webchat.DTOs.PsychologistSignUpDTO;
+import com.pabloprata.backend.webchat.dto.PsychologistDetailsDTO;
+import com.pabloprata.backend.webchat.dto.UserResponseDTO;
+import com.pabloprata.backend.webchat.dto.PsychologistCreatedDTO;
+import com.pabloprata.backend.webchat.dto.PsychologistSignUpDTO;
 import com.pabloprata.backend.webchat.domain.Patient;
 import com.pabloprata.backend.webchat.domain.User;
 import com.pabloprata.backend.webchat.factory.PatientFactory;
@@ -42,6 +43,12 @@ public class PsychologistService {
         psychologistRepository.save(psychologist);
 
         return psychologistFactory.convertEntityToResponse(psychologist);
+    }
+
+    @Transactional(readOnly = true)
+    public PsychologistDetailsDTO getPsychologistDetails(UUID userId) {
+        return psychologistRepository.findPsychologistDetailsByUserId(userId)
+                .orElseThrow(() -> new RuntimeException("Psicólogo não encontrado"));
     }
 
     public Page<UserResponseDTO> getPatientsByPsychologist(UUID psychologistId, Pageable pagination) {

@@ -1,4 +1,4 @@
-package com.pabloprata.backend.webchat.DTOs;
+package com.pabloprata.backend.webchat.dto;
 
 import jakarta.validation.constraints.NotBlank;
 
