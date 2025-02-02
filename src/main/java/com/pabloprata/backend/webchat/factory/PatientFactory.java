@@ -72,6 +72,7 @@ public class PatientFactory {
                 patient.getUser().getCpf(),
                 patient.getUser().getTelephone(),
                 patient.getUser().getEmail(),
+                patient.getPatientStatus(),
                 patient.getUser().getProfileImg(),
                 dateBirth
         );

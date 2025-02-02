@@ -13,6 +13,8 @@ public record UserResponseDTO(
 
         String email,
 
+        String patientStatus,
+
         String image,
 
         String dateBirth
