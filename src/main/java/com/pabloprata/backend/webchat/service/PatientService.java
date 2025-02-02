@@ -63,7 +63,7 @@ public class PatientService {
     @Transactional(readOnly = true)
     public PatientDetailsDTO getPatientDetails(UUID userId) {
         return patientRepository.findPatientDetailsByUserId(userId)
-                .orElseThrow(() -> new RuntimeException("Paciente não encontrado"));
+                .orElseThrow(() -> new EntityNotFoundException("Paciente não encontrado"));
     }
 
     private boolean isValidStatus(String status) {

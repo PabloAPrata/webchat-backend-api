@@ -12,6 +12,7 @@ import com.pabloprata.backend.webchat.domain.Psychologist;
 import com.pabloprata.backend.webchat.repository.PatientRepository;
 import com.pabloprata.backend.webchat.repository.PsychologistRepository;
 import com.pabloprata.backend.webchat.repository.UserRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -48,7 +49,7 @@ public class PsychologistService {
     @Transactional(readOnly = true)
     public PsychologistDetailsDTO getPsychologistDetails(UUID userId) {
         return psychologistRepository.findPsychologistDetailsByUserId(userId)
-                .orElseThrow(() -> new RuntimeException("Psicólogo não encontrado"));
+                .orElseThrow(() -> new EntityNotFoundException("Psicólogo não encontrado"));
     }
 
     public Page<UserResponseDTO> getPatientsByPsychologist(UUID psychologistId, Pageable pagination) {

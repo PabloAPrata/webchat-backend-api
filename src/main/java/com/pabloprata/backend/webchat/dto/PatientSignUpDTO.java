@@ -8,34 +8,34 @@ import java.util.UUID;
 
 public record PatientSignUpDTO(
 
-        @NotNull(message = "É necessário informar a qual psicólogo pertence este usuário")
+        @NotNull(message = "{psychologistId.mandatory}")
         UUID PsychologistId,
 
-        @NotBlank(message = "O nome não pode estar vazio.")
-        @Size(min = 2, max = 50, message = "O nome precisa ter entre 2 e 50 caracteres.")
+        @NotBlank(message = "{firstName.mandatory}")
+        @Size(min = 2, max = 50, message = "{firstName.incorrect.pattern}")
         String firstName,
 
-        @Size(min = 3, max = 50, message = "O nome do meio precisa ter entre 2 e 50 caracteres.")
+        @Size(min = 3, max = 50, message = "{middleName.incorrect.pattern}")
         String middleName,
 
-        @NotBlank(message = "O último nome não pode estar vazio.")
-        @Size(min = 2, max = 50, message = "O último nome precisa ter entre 2 e 50 caracteres.")
+        @NotBlank(message = "{lastName.mandatory}")
+        @Size(min = 2, max = 50, message = "{lastName.incorrect.pattern}")
         String lastName,
 
-        @NotBlank(message = "O CPF não pode estar vazio.")
+        @NotBlank(message = "{cpf.mandatory}")
         @CPF
         String cpf,
 
-        @NotBlank(message = "O nome não pode estar vazio.")
+        @NotBlank(message = "{phone.mandatory}")
         String phoneNumber,
 
-        @NotBlank(message = "Email é requerido.")
-        @Email(message = "Invalid email format")
+        @NotBlank(message = "{email.mandatory}")
+        @Email(message = "{email.incorrect.pattern}")
         String email,
 
         Date dateBirth,
 
-        @NotNull(message = "O gênero não pode estar vazio.")
+        @NotNull(message = "{gender.mandatory}")
         Integer genderId
 ) {
 }

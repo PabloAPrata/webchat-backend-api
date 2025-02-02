@@ -6,41 +6,40 @@ import org.hibernate.validator.constraints.br.CPF;
 import java.util.Date;
 
 public record PsychologistSignUpDTO(
-        @NotBlank(message = "O primeiro nome não pode estar vazio.")
-        @Size(min = 2, max = 50, message = "O nome precisa ter entre 2 e 50 caracteres.")
+        @NotBlank(message = "{firstName.mandatory}")
+        @Size(min = 2, max = 50, message = "{firstName.incorrect.pattern}")
         String firstName,
 
-        @Size(min = 3, max = 50, message = "O nome do meio precisa ter entre 2 e 50 caracteres.")
+        @Size(min = 3, max = 50, message = "{middleName.mandatory}")
         String middleName,
 
-        @NotBlank(message = "O último nome não pode estar vazio.")
-        @Size(min = 2, max = 50, message = "O último nome precisa ter entre 2 e 50 caracteres.")
+        @NotBlank(message = "{lastName.mandatory}")
+        @Size(min = 2, max = 50, message = "{lastName.incorrect.pattern}")
         String lastName,
 
-        @NotBlank(message = "O CPF não pode estar vazio.")
+        @NotBlank(message = "{cpf.mandatory}")
         @CPF
         String cpf,
 
-        @NotBlank(message = "O CRP não pode estar vazio.")
+        @NotBlank(message = "crp.mandatory")
         @Pattern(regexp = "^[A-Z]{2}/\\d{4,5}(-\\d{1,2})?$",
-                        message = "Digite um CRP válido.")
+                        message = "crp.incorrect.pattern")
         String crp,
 
-        @NotBlank(message = "O telefone não pode estar vazio.")
+        @NotBlank(message = "{phone.mandatory}")
         String phoneNumber,
 
-        @NotBlank(message = "Email é requerido.")
-        @Email(message = "Email no formato errado.")
+        @NotBlank(message = "{email.mandatory}")
+        @Email(message = "email.incorrect.pattern")
         String email,
 
         Date dateBirth,
 
-        @NotNull(message = "O gênero não pode estar vazio.")
+        @NotNull(message = "{gender.mandatory}")
         Integer genderId,
 
-        @NotBlank(message = "A senha não pode estar vazia.")
-        @Size(min = 8, message = "A senha deve ter pelo menos 8 caracteres")
+        @NotBlank(message = "{password.mandatory}")
         @Pattern(regexp = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[!@#$%^&*]).{8,}$",
-                message = "A senha deve conter pelo menos 1 letra maiúscula, 1 letra minúscula, 1 número e 1 caractere especial")
+                message = "{password.incorrect.pattern}")
         String password
 ) {}
