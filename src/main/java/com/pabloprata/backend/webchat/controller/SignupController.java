@@ -49,7 +49,7 @@ public class SignupController {
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
-                .path("/{id}")
+                .path("/patient/{id}")
                 .buildAndExpand(patientCreatedDTO.id())
                 .toUri();
 

@@ -1,6 +1,7 @@
 package com.pabloprata.backend.webchat.service;
 
 import com.pabloprata.backend.webchat.dto.PatientCreatedDTO;
+import com.pabloprata.backend.webchat.dto.PatientDetailsDTO;
 import com.pabloprata.backend.webchat.dto.PatientSignUpDTO;
 import com.pabloprata.backend.webchat.domain.Patient;
 import com.pabloprata.backend.webchat.domain.Psychologist;
@@ -59,6 +60,11 @@ public class PatientService {
         patientRepository.save(patient);
     }
 
+    @Transactional(readOnly = true)
+    public PatientDetailsDTO getPatientDetails(UUID userId) {
+        return patientRepository.findPatientDetailsByUserId(userId)
+                .orElseThrow(() -> new RuntimeException("Paciente não encontrado"));
+    }
 
     private boolean isValidStatus(String status) {
         return status.equals("ativo") || status.equals("acompanhamento") || status.equals("finalizado");

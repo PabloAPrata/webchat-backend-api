@@ -1,5 +1,6 @@
 package com.pabloprata.backend.webchat.controller;
 
+import com.pabloprata.backend.webchat.dto.PatientDetailsDTO;
 import com.pabloprata.backend.webchat.dto.PatientStatusUpdateDTO;
 import com.pabloprata.backend.webchat.service.PatientService;
 import jakarta.validation.Valid;
@@ -10,15 +11,21 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/patients")
+@RequestMapping("/patient")
 public class PatientController {
 
     @Autowired
-    private PatientService patientService;
+    private PatientService service;
+
+    @GetMapping("/{userId}")
+    public ResponseEntity<PatientDetailsDTO> getPatientDetails(@PathVariable UUID userId) {
+        PatientDetailsDTO details = service.getPatientDetails(userId);
+        return ResponseEntity.ok(details);
+    }
 
     @PatchMapping("/{userId}/status")
     public ResponseEntity<Void> updatePatientStatus(@PathVariable UUID userId, @RequestBody @Valid PatientStatusUpdateDTO statusUpdateDTO) {
-        patientService.updatePatientStatus(userId, statusUpdateDTO.patientStatus());
+        service.updatePatientStatus(userId, statusUpdateDTO.patientStatus());
         return ResponseEntity.noContent().build();
     }
 }
