@@ -14,8 +14,7 @@ public class Psychologist {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "psychologist_id")
-    private Long psychologistId;
+    private Long id;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "fk_user_id", nullable = false, unique = true)

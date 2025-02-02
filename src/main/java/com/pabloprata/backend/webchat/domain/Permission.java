@@ -13,8 +13,7 @@ public class Permission {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "permission_id")
-    private Integer permissionId;
+    private Integer id;
 
     @Column(name = "name", nullable = false, length = 50)
     private String name;

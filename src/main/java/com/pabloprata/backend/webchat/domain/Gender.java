@@ -9,7 +9,6 @@ import lombok.*;
 public class Gender {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "gender_id")
     private Long id;
 
     @Column(name = "name", length = 1, unique = true, nullable = false)

@@ -14,7 +14,6 @@ public class City {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "city_id")
     private Long id;
 
     @NotBlank(message = "Nome da cidade é obrigatório.")
@@ -22,7 +21,7 @@ public class City {
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "fk_state_id", referencedColumnName = "state_id", nullable = false)
+    @JoinColumn(name = "fk_state_id", referencedColumnName = "id", nullable = false)
     private State state;
 
     @Column(name = "created_at", columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")

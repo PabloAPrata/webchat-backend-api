@@ -9,7 +9,6 @@ import lombok.Data;
 public class TypeNotification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "type_notification_id")
     private Long id;
 
     @Column(name = "name", length = 20, unique = true, nullable = false)

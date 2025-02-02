@@ -49,7 +49,7 @@ public class PsychologistFactory {
         String lastName = nameLength > 1 ? nameParts[nameLength - 1] : "";
 
         return new PsychologistCreatedDTO(
-                psychologist.getUser().getUserId(),
+                psychologist.getUser().getId(),
                 firstName,
                 lastName,
                 psychologist.getCrp(),

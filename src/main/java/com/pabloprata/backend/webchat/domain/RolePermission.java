@@ -15,12 +15,12 @@ public class RolePermission {
 
     @ManyToOne
     @MapsId("roleId")
-    @JoinColumn(name = "fk_role_id", referencedColumnName = "role_id")
+    @JoinColumn(name = "fk_role_id", referencedColumnName = "id")
     private Role role;
 
     @ManyToOne
     @MapsId("permissionId")
-    @JoinColumn(name = "fk_permission_id", referencedColumnName = "permission_id")
+    @JoinColumn(name = "fk_permission_id", referencedColumnName = "id")
     private Permission permission;
 }
 

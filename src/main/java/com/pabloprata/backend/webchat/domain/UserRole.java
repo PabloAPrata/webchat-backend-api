@@ -15,12 +15,12 @@ public class UserRole {
 
     @ManyToOne
     @MapsId("userId")
-    @JoinColumn(name = "fk_user_id", referencedColumnName = "user_id")
+    @JoinColumn(name = "fk_user_id", referencedColumnName = "id")
     private User user;
 
     @ManyToOne
     @MapsId("roleId")
-    @JoinColumn(name = "fk_role_id", referencedColumnName = "role_id")
+    @JoinColumn(name = "fk_role_id", referencedColumnName = "id")
     private Role role;
 }
 

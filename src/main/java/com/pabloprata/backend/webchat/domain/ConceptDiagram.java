@@ -12,8 +12,7 @@ public class ConceptDiagram {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "concept_diagram_id")
-    private Integer conceptDiagramId;
+    private Integer id;
 
     @Column(name = "core_beliefs")
     private String coreBeliefs;

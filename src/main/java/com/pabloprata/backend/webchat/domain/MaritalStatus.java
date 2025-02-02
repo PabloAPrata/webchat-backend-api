@@ -10,8 +10,7 @@ public class MaritalStatus {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "marital_id")
-    private Integer maritalId;
+    private Integer id;
 
     @Column(name = "description", unique = true, nullable = false)
     private String description;

@@ -53,7 +53,7 @@ public class PatientFactory {
         String lastName = nameLength > 1 ? nameParts[nameLength - 1] : "";
 
         return new PatientCreatedDTO(
-                patient.getUser().getUserId(),
+                patient.getUser().getId(),
                 firstName,
                 lastName,
                 patient.getUser().getTelephone(),
@@ -67,7 +67,7 @@ public class PatientFactory {
         String dateBirth = (patient.getUser().getDateBirth() != null) ? patient.getUser().getDateBirth().toString() : null;
 
         return new UserResponseDTO(
-                patient.getUser().getUserId(),
+                patient.getUser().getId(),
                 patient.getUser().getName(),
                 patient.getUser().getCpf(),
                 patient.getUser().getTelephone(),

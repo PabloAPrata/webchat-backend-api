@@ -12,17 +12,15 @@ public class Patient {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "patient_id")
-    private Long patientId;
+    private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "fk_user_id", referencedColumnName = "user_id", nullable = false, unique = true)
+    @JoinColumn(name = "fk_user_id", referencedColumnName = "id", nullable = false, unique = true)
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "fk_psychologist_id", referencedColumnName = "psychologist_id", nullable = false)
+    @JoinColumn(name = "fk_psychologist_id", referencedColumnName = "id", nullable = false)
     private Psychologist psychologist;
-
 
     @Column(name = "patient_status", length = 50, nullable = false)
     private String patientStatus;

@@ -13,8 +13,7 @@ public class Country {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "country_id")
-    private Long countryId;
+    private Long id;
 
     @Column(name = "name", nullable = false, length = 100)
     private String name;

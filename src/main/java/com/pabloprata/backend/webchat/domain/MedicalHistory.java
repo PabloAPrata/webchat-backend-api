@@ -10,43 +10,42 @@ public class MedicalHistory {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "medical_history_id")
-    private Integer medicalHistoryId;
+    private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "fk_patient_id", referencedColumnName = "patient_id", nullable = false)
+    @JoinColumn(name = "fk_patient_id", referencedColumnName = "id", nullable = false)
     private Patient patient;
 
     @ManyToOne
-    @JoinColumn(name = "fk_patient_occupation_id", referencedColumnName = "occupation_id", nullable = false)
+    @JoinColumn(name = "fk_patient_occupation_id", referencedColumnName = "id", nullable = false)
     private Occupation patientOccupation;
 
     @ManyToOne
-    @JoinColumn(name = "fk_patient_marital_id", referencedColumnName = "marital_id", nullable = false)
+    @JoinColumn(name = "fk_patient_marital_id", referencedColumnName = "id", nullable = false)
     private MaritalStatus patientMaritalStatus;
 
     @ManyToOne
-    @JoinColumn(name = "fk_patient_religion_id", referencedColumnName = "religion_id", nullable = false)
+    @JoinColumn(name = "fk_patient_religion_id", referencedColumnName = "id", nullable = false)
     private Religion patientReligion;
 
     @ManyToOne
-    @JoinColumn(name = "fk_patient_education_id", referencedColumnName = "education_id", nullable = false)
+    @JoinColumn(name = "fk_patient_education_id", referencedColumnName = "id", nullable = false)
     private EducationLevel patientEducation;
 
     @ManyToOne
-    @JoinColumn(name = "fk_fathers_education_id", referencedColumnName = "education_id")
+    @JoinColumn(name = "fk_fathers_education_id", referencedColumnName = "id")
     private EducationLevel fathersEducation;
 
     @ManyToOne
-    @JoinColumn(name = "fk_fathers_occupation_id", referencedColumnName = "occupation_id")
+    @JoinColumn(name = "fk_fathers_occupation_id", referencedColumnName = "id")
     private Occupation fathersOccupation;
 
     @ManyToOne
-    @JoinColumn(name = "fk_mothers_education_id", referencedColumnName = "education_id")
+    @JoinColumn(name = "fk_mothers_education_id", referencedColumnName = "id")
     private EducationLevel mothersEducation;
 
     @ManyToOne
-    @JoinColumn(name = "fk_mothers_occupation_id", referencedColumnName = "occupation_id")
+    @JoinColumn(name = "fk_mothers_occupation_id", referencedColumnName = "id")
     private Occupation mothersOccupation;
 
     @Column(name = "fathers_name")
@@ -61,6 +60,6 @@ public class MedicalHistory {
     @Column(name = "mothers_age")
     private Integer mothersAge;
 
-    @Column(name = "parents_notes", length = 255)
+    @Column(name = "parents_notes")
     private String parentsNotes;
 }

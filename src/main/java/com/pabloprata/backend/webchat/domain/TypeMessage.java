@@ -10,7 +10,6 @@ public class TypeMessage {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "type_message_id")
     private Long id;
 
     @Column(name = "name", length = 20, unique = true, nullable = false)

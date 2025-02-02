@@ -12,7 +12,6 @@ public class ChatMessage {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "chat_message_id")
     private Long id;
 
     @ManyToOne

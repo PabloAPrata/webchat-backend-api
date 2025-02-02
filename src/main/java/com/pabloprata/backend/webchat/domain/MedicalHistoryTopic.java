@@ -12,11 +12,11 @@ public class MedicalHistoryTopic {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "history_topic_id")
-    private Integer historyTopicId;
+    @Column(name = "id")
+    private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "fk_medical_history_id", referencedColumnName = "medical_history_id", nullable = false)
+    @JoinColumn(name = "fk_medical_history_id", referencedColumnName = "id", nullable = false)
     private MedicalHistory medicalHistory;
 
     @Column(name = "title", nullable = false)

@@ -10,8 +10,7 @@ public class Occupation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "occupation_id")
-    private Integer occupationId;
+    private Integer id;
 
     @Column(name = "description", unique = true, nullable = false)
     private String description;

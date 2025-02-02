@@ -9,7 +9,6 @@ import lombok.Data;
 public class StatusMeeting {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "status_meeting_id")
     private Long id;
 
     @Column(name = "name", length = 20, unique = true, nullable = false)

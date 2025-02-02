@@ -12,7 +12,7 @@ import java.util.UUID;
 
 @Repository
 public interface PsychologistRepository extends JpaRepository<Psychologist, Long> {
-    Optional<Psychologist> findByUserUserId(UUID userId);
+    Optional<Psychologist> findByUserId(UUID userId);
 
     @Query("""
                 SELECT new com.pabloprata.backend.webchat.dto.PsychologistDetailsDTO(
@@ -29,6 +29,6 @@ public interface PsychologistRepository extends JpaRepository<Psychologist, Long
                 LEFT JOIN Country co ON s.country.id = co.id
                 WHERE u.id = :userId
             """)
-    Optional<PsychologistDetailsDTO> findPsychologistDetailsByUserId(@Param("userId") UUID userId);
+    Optional<PsychologistDetailsDTO> findPsychologistDetailsById(@Param("userId") UUID userId);
 
 }

@@ -36,7 +36,7 @@ public class PatientService {
 
         User savedUser = userRepository.save(patient.getUser());
 
-        Psychologist psychologist = psychologistRepository.findByUserUserId(dto.PsychologistId()).orElseThrow(() -> new EntityNotFoundException("Psicólogo não encontrado para o usuário com ID: " + savedUser.getUserId()));
+        Psychologist psychologist = psychologistRepository.findByUserId(dto.PsychologistId()).orElseThrow(() -> new EntityNotFoundException("Psicólogo não encontrado para o usuário com ID: " + savedUser.getId()));
 
         patient.setPsychologist(psychologist);
 
@@ -50,7 +50,7 @@ public class PatientService {
     @Transactional
     public void updatePatientStatus(UUID userId, String newStatus) {
 
-        Patient patient = patientRepository.findByUser_UserId(userId).orElseThrow(() -> new EntityNotFoundException("Paciente não encontrado para o usuário ID: " + userId));
+        Patient patient = patientRepository.findByUser_Id(userId).orElseThrow(() -> new EntityNotFoundException("Paciente não encontrado para o usuário ID: " + userId));
 
         if (!isValidStatus(newStatus)) {
             throw new IllegalArgumentException("Status inválido: " + newStatus);

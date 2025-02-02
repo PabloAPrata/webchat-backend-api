@@ -10,7 +10,6 @@ public class ConceptElement {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "concept_element_id")
     private Integer conceptElementId;
 
     @ManyToOne

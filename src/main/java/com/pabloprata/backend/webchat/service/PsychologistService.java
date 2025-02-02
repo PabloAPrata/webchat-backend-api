@@ -48,13 +48,13 @@ public class PsychologistService {
 
     @Transactional(readOnly = true)
     public PsychologistDetailsDTO getPsychologistDetails(UUID userId) {
-        return psychologistRepository.findPsychologistDetailsByUserId(userId)
+        return psychologistRepository.findPsychologistDetailsById(userId)
                 .orElseThrow(() -> new EntityNotFoundException("Psicólogo não encontrado"));
     }
 
     public Page<UserResponseDTO> getPatientsByPsychologist(UUID psychologistId, Pageable pagination) {
 
-        Page<Patient> patientsPage = patientRepository.findByPsychologist_User_UserId(psychologistId, pagination);
+        Page<Patient> patientsPage = patientRepository.findByPsychologist_User_Id(psychologistId, pagination);
 
         return patientsPage.map(patientFactory::convertEntityToResponse);
     }

@@ -12,7 +12,6 @@ public class Meeting {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "meeting_id")
     private Long id;
 
     @Column(name = "title", nullable = false)
