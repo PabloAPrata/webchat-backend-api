@@ -16,6 +16,7 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,6 +32,7 @@ public class PsychologistService {
     private final PatientRepository patientRepository;
     private final PsychologistFactory psychologistFactory;
     private final PatientFactory patientFactory;
+    private final PasswordEncoder passwordEncoder;
 
     @Transactional
     public PsychologistCreatedDTO signup(PsychologistSignUpDTO dto) {
@@ -41,6 +43,8 @@ public class PsychologistService {
 
         psychologist.setUser(savedUser);
 
+        psychologist.setPassword(passwordEncoder.encode(dto.password()));
+
         psychologistRepository.save(psychologist);
 
         return psychologistFactory.convertEntityToResponse(psychologist);
@@ -48,10 +52,10 @@ public class PsychologistService {
 
     @Transactional(readOnly = true)
     public PsychologistDetailsDTO getPsychologistDetails(UUID userId) {
-        return psychologistRepository.findPsychologistDetailsById(userId)
-                .orElseThrow(() -> new EntityNotFoundException("Psicólogo não encontrado"));
+        return psychologistRepository.findPsychologistDetailsById(userId).orElseThrow(() -> new EntityNotFoundException("Psicólogo não encontrado"));
     }
 
+    @Transactional(readOnly = true)
     public Page<UserResponseDTO> getPatientsByPsychologist(UUID psychologistId, Pageable pagination) {
 
         Page<Patient> patientsPage = patientRepository.findByPsychologist_User_Id(psychologistId, pagination);

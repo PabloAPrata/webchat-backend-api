@@ -5,7 +5,7 @@ import com.pabloprata.backend.webchat.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Service
@@ -14,6 +14,7 @@ public class UserService {
 
     private final UserRepository repository;
 
+    @Transactional
     public void update(UpdateUserDTO dto) {
 
         int updatedRows =  repository.updateUser(

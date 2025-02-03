@@ -14,6 +14,8 @@ import java.util.UUID;
 public interface PsychologistRepository extends JpaRepository<Psychologist, Long> {
     Optional<Psychologist> findByUserId(UUID userId);
 
+    Optional<Psychologist> findByUserEmail(String email);
+
     @Query("""
                 SELECT new com.pabloprata.backend.webchat.dto.PsychologistDetailsDTO(
                     u.name, u.email, u.telephone, p.crp, g.name,

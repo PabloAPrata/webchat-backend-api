@@ -1,6 +1,6 @@
 package com.pabloprata.backend.webchat.service;
 
-import com.pabloprata.backend.webchat.repository.AdminRepository;
+import com.pabloprata.backend.webchat.repository.PsychologistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -11,10 +11,11 @@ import org.springframework.stereotype.Service;
 public class AuthenticationService implements UserDetailsService {
 
     @Autowired
-    private AdminRepository repository;
+    private PsychologistRepository repository;
 
     @Override
     public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
-        return repository.findByLogin(login);
+        return repository.findByUserEmail(login)
+                .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado"));
     }
 }
