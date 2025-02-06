@@ -12,6 +12,6 @@ public class EducationLevel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Column(name = "description", unique = true, nullable = false)
-    private String description;
+    @Column(unique = true, nullable = false)
+    private String name;
 }

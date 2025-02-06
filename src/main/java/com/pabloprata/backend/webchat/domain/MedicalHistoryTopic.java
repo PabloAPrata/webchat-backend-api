@@ -16,7 +16,7 @@ public class MedicalHistoryTopic {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "fk_medical_history_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "fk_medical_history_id", referencedColumnName = "fk_patient_id", nullable = false)
     private MedicalHistory medicalHistory;
 
     @Column(name = "title", nullable = false)

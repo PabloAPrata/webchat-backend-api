@@ -38,7 +38,7 @@ public class PsychologistController {
         var authenticationToken = new UsernamePasswordAuthenticationToken(auth.login(), auth.password());
         var authentication = manager.authenticate(authenticationToken);
 
-        var tokenJWT = tokenService.generateToken((Psychologist) authentication.getPrincipal());
+        String tokenJWT = tokenService.generateToken((Psychologist) authentication.getPrincipal());
 
         return ResponseEntity.ok(new LoginTokenDTO(tokenJWT));
     }

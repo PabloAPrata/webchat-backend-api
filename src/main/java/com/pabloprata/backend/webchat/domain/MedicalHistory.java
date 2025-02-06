@@ -9,57 +9,52 @@ import jakarta.persistence.*;
 public class MedicalHistory {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    @Column(name = "fk_patient_id")
+    private Integer patientId;
 
-    @ManyToOne
-    @JoinColumn(name = "fk_patient_id", referencedColumnName = "id", nullable = false)
+    @OneToOne
+    @JoinColumn(name = "fk_patient_id", referencedColumnName = "id", updatable = false, insertable = false)
     private Patient patient;
 
     @ManyToOne
-    @JoinColumn(name = "fk_patient_occupation_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "fk_patient_occupation_id")
     private Occupation patientOccupation;
 
     @ManyToOne
-    @JoinColumn(name = "fk_patient_marital_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "fk_patient_marital_id")
     private MaritalStatus patientMaritalStatus;
 
     @ManyToOne
-    @JoinColumn(name = "fk_patient_religion_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "fk_patient_religion_id")
     private Religion patientReligion;
 
     @ManyToOne
-    @JoinColumn(name = "fk_patient_education_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "fk_patient_education_id")
     private EducationLevel patientEducation;
 
+    private String fathersName;
+    private Integer fathersAge;
+
     @ManyToOne
-    @JoinColumn(name = "fk_fathers_education_id", referencedColumnName = "id")
+    @JoinColumn(name = "fk_fathers_education_id")
     private EducationLevel fathersEducation;
 
     @ManyToOne
-    @JoinColumn(name = "fk_fathers_occupation_id", referencedColumnName = "id")
+    @JoinColumn(name = "fk_fathers_occupation_id")
     private Occupation fathersOccupation;
 
+    private String mothersName;
+    private Integer mothersAge;
+
     @ManyToOne
-    @JoinColumn(name = "fk_mothers_education_id", referencedColumnName = "id")
+    @JoinColumn(name = "fk_mothers_education_id")
     private EducationLevel mothersEducation;
 
     @ManyToOne
-    @JoinColumn(name = "fk_mothers_occupation_id", referencedColumnName = "id")
+    @JoinColumn(name = "fk_mothers_occupation_id")
     private Occupation mothersOccupation;
 
-    @Column(name = "fathers_name")
-    private String fathersName;
+    private String fatherNotes;
+    private String motherNotes;
 
-    @Column(name = "fathers_age")
-    private Integer fathersAge;
-
-    @Column(name = "mothers_name")
-    private String mothersName;
-
-    @Column(name = "mothers_age")
-    private Integer mothersAge;
-
-    @Column(name = "parents_notes")
-    private String parentsNotes;
 }
