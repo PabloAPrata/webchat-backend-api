@@ -5,6 +5,7 @@ import com.pabloprata.backend.webchat.dto.MedicalHistoryDTO;
 import com.pabloprata.backend.webchat.dto.MedicalHistoryResponseDTO;
 import com.pabloprata.backend.webchat.factory.MedicalHistoryFactory;
 import com.pabloprata.backend.webchat.repository.*;
+import com.pabloprata.backend.webchat.service.validations.AlreadyExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -24,6 +25,10 @@ public class MedicalHistoryService {
     public void createMedicalHistory(UUID userId, @Valid MedicalHistoryDTO anamneseDTO) {
 
         Patient patient = patientRepository.findByUser_Id(userId).orElseThrow(() -> new EntityNotFoundException("Paciente não encontrado"));
+
+        if(medicalHistoryRepository.existsById(patient.getId().intValue())) {
+            throw new AlreadyExistsException("O paciente já possui um histórico médico!");
+        }
 
         medicalHistoryRepository.insertMedicalHistory(
                 patient.getId(),

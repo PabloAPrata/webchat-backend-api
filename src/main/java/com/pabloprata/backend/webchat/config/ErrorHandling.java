@@ -1,37 +1,48 @@
 package com.pabloprata.backend.webchat.config;
 
+import com.pabloprata.backend.webchat.service.validations.AlreadyExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.FieldError;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
+import java.util.Map;
+import java.util.Objects;
 
 @RestControllerAdvice
 public class ErrorHandling {
 
     @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity<?> error404handling() {
-        return ResponseEntity.notFound().build();
+    public ResponseEntity<?> handleNotFound(EntityNotFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("error", ex.getMessage()));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<?> error400handling(MethodArgumentNotValidException ex) {
-        var errors = ex.getFieldErrors();
-        return ResponseEntity.badRequest().body(errors.stream().map(errorDataValidation::new).toList());
+    public ResponseEntity<?> handleValidation(MethodArgumentNotValidException ex) {
+        var errors = ex.getFieldErrors().stream()
+                .map(error -> Map.of("field", error.getField(), "message", Objects.requireNonNull(error.getDefaultMessage())))
+                .toList();
+        return ResponseEntity.badRequest().body(errors);
     }
 
-    @ExceptionHandler(DataIntegrityViolationException.class)
-    public ResponseEntity<?> error409handling(DataIntegrityViolationException ex) {
-        var error = ex.getCause().getMessage();
-        return ResponseEntity.status(409).body(error);
+    @ExceptionHandler({DataIntegrityViolationException.class, AlreadyExistsException.class})
+    public ResponseEntity<?> handleConflict(Exception ex) {
+        String errorMessage = (ex.getCause() != null) ? ex.getCause().getMessage() : ex.getMessage();
+        return ResponseEntity.status(409).body(Map.of("error", errorMessage));
     }
 
-    private record errorDataValidation (String field, String message)
-    {
-        public errorDataValidation(FieldError error) {
-            this(error.getField(), error.getDefaultMessage());
-        }
+
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseEntity<?> handleAccessDenied(AccessDeniedException ex) {
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(Map.of("error", "Acesso negado!"));
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<?> handleGenericException(Exception ex) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Map.of("error", "Erro interno: " + ex.getMessage()));
     }
 }

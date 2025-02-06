@@ -11,6 +11,7 @@ import com.pabloprata.backend.webchat.factory.PatientFactory;
 import com.pabloprata.backend.webchat.repository.PatientRepository;
 import com.pabloprata.backend.webchat.repository.PsychologistRepository;
 import com.pabloprata.backend.webchat.repository.UserRepository;
+import com.pabloprata.backend.webchat.service.validations.AlreadyExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -32,6 +33,10 @@ public class PatientService {
     public PatientCreatedDTO signup(PatientSignUpDTO dto) {
 
         Patient patient = factory.convertSignupDtoToEntity(dto);
+
+        if(userRepository.existsByCpf(patient.getUser().getCpf())) {
+            throw new AlreadyExistsException("Este CPF já está cadastrado!");
+        }
 
         patient.setPatientStatus("ativo");
 

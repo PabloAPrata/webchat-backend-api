@@ -12,6 +12,9 @@ import java.util.UUID;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, UUID> {
+
+    boolean existsByCpf(String cpf);
+
     @Modifying
     @Transactional
     @Query("UPDATE User u SET u.name = :name, u.profileImg = :profileImg, u.dateBirth = :dateBirth, " +

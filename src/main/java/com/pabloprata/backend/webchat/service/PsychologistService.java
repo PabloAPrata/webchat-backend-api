@@ -12,6 +12,7 @@ import com.pabloprata.backend.webchat.domain.Psychologist;
 import com.pabloprata.backend.webchat.repository.PatientRepository;
 import com.pabloprata.backend.webchat.repository.PsychologistRepository;
 import com.pabloprata.backend.webchat.repository.UserRepository;
+import com.pabloprata.backend.webchat.service.validations.AlreadyExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -38,6 +39,10 @@ public class PsychologistService {
     public PsychologistCreatedDTO signup(PsychologistSignUpDTO dto) {
 
         Psychologist psychologist = psychologistFactory.convertDtoToEntity(dto);
+
+        if(userRepository.existsByCpf(psychologist.getUser().getCpf())) {
+            throw new AlreadyExistsException("Este CPF já está cadastrado!");
+        }
 
         User savedUser = userRepository.save(psychologist.getUser());
 
