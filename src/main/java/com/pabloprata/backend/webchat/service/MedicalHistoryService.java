@@ -5,7 +5,7 @@ import com.pabloprata.backend.webchat.dto.MedicalHistoryDTO;
 import com.pabloprata.backend.webchat.dto.MedicalHistoryResponseDTO;
 import com.pabloprata.backend.webchat.factory.MedicalHistoryFactory;
 import com.pabloprata.backend.webchat.repository.*;
-import com.pabloprata.backend.webchat.service.validations.AlreadyExistsException;
+import com.pabloprata.backend.webchat.config.error.exceptions.AlreadyExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

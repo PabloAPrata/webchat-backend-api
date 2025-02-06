@@ -1,6 +1,6 @@
-package com.pabloprata.backend.webchat.config;
+package com.pabloprata.backend.webchat.config.error;
 
-import com.pabloprata.backend.webchat.service.validations.AlreadyExistsException;
+import com.pabloprata.backend.webchat.config.error.exceptions.AlreadyExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;

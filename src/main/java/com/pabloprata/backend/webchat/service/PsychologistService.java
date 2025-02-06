@@ -12,7 +12,7 @@ import com.pabloprata.backend.webchat.domain.Psychologist;
 import com.pabloprata.backend.webchat.repository.PatientRepository;
 import com.pabloprata.backend.webchat.repository.PsychologistRepository;
 import com.pabloprata.backend.webchat.repository.UserRepository;
-import com.pabloprata.backend.webchat.service.validations.AlreadyExistsException;
+import com.pabloprata.backend.webchat.config.error.exceptions.AlreadyExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
