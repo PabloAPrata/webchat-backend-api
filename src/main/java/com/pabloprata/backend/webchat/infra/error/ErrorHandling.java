@@ -1,10 +1,11 @@
-package com.pabloprata.backend.webchat.config.error;
+package com.pabloprata.backend.webchat.infra.error;
 
-import com.pabloprata.backend.webchat.config.error.exceptions.AlreadyExistsException;
+import com.pabloprata.backend.webchat.infra.error.exceptions.AlreadyExistsException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -19,6 +20,11 @@ public class ErrorHandling {
     @ExceptionHandler(EntityNotFoundException.class)
     public ResponseEntity<?> handleNotFound(EntityNotFoundException ex) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Map.of("error", ex.getMessage()));
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<?> bodyMissing(HttpMessageNotReadableException ex) {
+        return ResponseEntity.badRequest().body(Map.of("error", "Required body is missing" ));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

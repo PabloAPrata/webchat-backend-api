@@ -1,4 +1,4 @@
-package com.pabloprata.backend.webchat.config.security;
+package com.pabloprata.backend.webchat.infra.security;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;

@@ -1,4 +1,4 @@
-package com.pabloprata.backend.webchat.config.security;
+package com.pabloprata.backend.webchat.infra.security;
 
 
 import com.pabloprata.backend.webchat.repository.PsychologistRepository;

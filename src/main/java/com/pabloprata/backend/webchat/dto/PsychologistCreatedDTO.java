@@ -1,6 +1,5 @@
 package com.pabloprata.backend.webchat.dto;
 
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 public record PsychologistCreatedDTO(
@@ -14,8 +13,6 @@ public record PsychologistCreatedDTO(
 
         String phoneNumber,
 
-        String email,
-
-        LocalDateTime createdAt
+        String email
 )
 {}

@@ -57,8 +57,7 @@ public class PatientFactory {
                 firstName,
                 lastName,
                 patient.getUser().getTelephone(),
-                patient.getUser().getEmail(),
-                patient.getUser().getCreatedAt()
+                patient.getUser().getEmail()
         );
     }
 

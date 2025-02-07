@@ -5,8 +5,8 @@ import jakarta.validation.constraints.*;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.UUID;
 
 @Data
@@ -40,7 +40,7 @@ public class User {
     private String profileImg;
 
     @Column(name = "date_birth")
-    private Date dateBirth;
+    private LocalDate dateBirth;
 
     @NotNull(message = "Gênero é obrigatório.")
     @ManyToOne

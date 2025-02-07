@@ -1,12 +1,12 @@
 package com.pabloprata.backend.webchat.controller;
 
 import com.pabloprata.backend.webchat.domain.Psychologist;
-import com.pabloprata.backend.webchat.config.security.DataAuthDTO;
-import com.pabloprata.backend.webchat.config.security.LoginTokenDTO;
+import com.pabloprata.backend.webchat.infra.security.DataAuthDTO;
+import com.pabloprata.backend.webchat.infra.security.LoginTokenDTO;
 import com.pabloprata.backend.webchat.dto.PsychologistDetailsDTO;
 import com.pabloprata.backend.webchat.dto.UserResponseDTO;
 import com.pabloprata.backend.webchat.service.PsychologistService;
-import com.pabloprata.backend.webchat.config.security.TokenService;
+import com.pabloprata.backend.webchat.infra.security.TokenService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
