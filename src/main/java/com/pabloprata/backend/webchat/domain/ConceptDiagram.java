@@ -6,8 +6,9 @@ import jakarta.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "concept_diagram")
 @Data
+@Table(name = "concept_diagram")
+
 public class ConceptDiagram {
 
     @Id

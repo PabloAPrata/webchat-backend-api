@@ -3,16 +3,27 @@ package com.pabloprata.backend.webchat.domain;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
-@Data
 @Entity
+@Data
+@NoArgsConstructor
 @Table(name = "users")
 public class User {
+
+    public User(String name, String cpf, String telephone, String email, LocalDate dateBirth, Gender gender) {
+        this.name = name;
+        this.cpf = cpf;
+        this.telephone = telephone;
+        this.email = email;
+        this.dateBirth = dateBirth;
+        this.gender = gender;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -39,7 +50,7 @@ public class User {
     @Column(name = "profile_img")
     private String profileImg;
 
-    @Column(name = "date_birth")
+    @Column(name = "date_birth", nullable = false)
     private LocalDate dateBirth;
 
     @NotNull(message = "Gênero é obrigatório.")
@@ -50,5 +61,6 @@ public class User {
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
+
 
 }

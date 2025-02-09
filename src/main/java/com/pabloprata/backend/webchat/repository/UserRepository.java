@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Repository
@@ -19,5 +19,5 @@ public interface UserRepository extends JpaRepository<User, UUID> {
     @Transactional
     @Query("UPDATE User u SET u.name = :name, u.profileImg = :profileImg, u.dateBirth = :dateBirth, " +
             "u.telephone = :phoneNumber, u.email = :email WHERE u.id = :id")
-    int updateUser(UUID id, String name, String profileImg, Date dateBirth, String phoneNumber, String email);
+    int updateUser(UUID id, String name, String profileImg, LocalDate dateBirth, String phoneNumber, String email);
 }

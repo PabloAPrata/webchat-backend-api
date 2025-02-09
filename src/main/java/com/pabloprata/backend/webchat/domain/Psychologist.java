@@ -3,6 +3,7 @@ package com.pabloprata.backend.webchat.domain;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -12,10 +13,17 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
-@Data
 @Entity
+@Data
+@NoArgsConstructor
 @Table(name = "psychologists")
 public class Psychologist implements UserDetails {
+
+    public Psychologist(User user, String crp, String password) {
+        this.user = user;
+        this.crp = crp;
+        this.password = password;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

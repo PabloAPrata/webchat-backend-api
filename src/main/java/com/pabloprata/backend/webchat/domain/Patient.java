@@ -2,13 +2,21 @@ package com.pabloprata.backend.webchat.domain;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-@Data
 @Entity
+@Data
+@NoArgsConstructor
 @Table(name = "patients")
 public class Patient {
+
+    public Patient(User user, Psychologist psychologist, String patientStatus) {
+        this.user = user;
+        this.psychologist = psychologist;
+        this.patientStatus = patientStatus;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

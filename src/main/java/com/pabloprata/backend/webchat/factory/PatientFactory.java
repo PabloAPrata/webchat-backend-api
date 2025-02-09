@@ -12,6 +12,9 @@ import com.pabloprata.backend.webchat.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 @Component
 public class PatientFactory {
 
@@ -29,11 +32,16 @@ public class PatientFactory {
         Gender gender = genderRepository.findById(Long.valueOf(dto.genderId()))
                 .orElseThrow(() -> new IllegalArgumentException("Gender não encontrado!"));
 
+        String dataString = dto.dateBirth();
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate date = LocalDate.parse(dataString, format);
+
         User user = new User();
         user.setName(dto.firstName() + " " + " " + dto.lastName());
         user.setCpf(dto.cpf());
         user.setTelephone(dto.phoneNumber());
         user.setEmail(dto.email());
+        user.setDateBirth(date);
         user.setGender(gender);
 
         Patient patient = new Patient();

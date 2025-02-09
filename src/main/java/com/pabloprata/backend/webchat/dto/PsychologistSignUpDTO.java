@@ -33,6 +33,7 @@ public record PsychologistSignUpDTO(
         @Email(message = "email.incorrect.pattern")
         String email,
 
+        @NotBlank(message = "{birth.date.mandatory}")
         @Pattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$", message = "{date.incorrect.pattern}")
         String dateBirth,
 

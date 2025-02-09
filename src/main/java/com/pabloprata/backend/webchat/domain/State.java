@@ -2,14 +2,22 @@ package com.pabloprata.backend.webchat.domain;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
-@Data
 @Entity
+@Data
+@NoArgsConstructor
 @Table(name = "states")
 public class State {
+
+    public State(String name, String uf, Country country) {
+        this.name = name;
+        this.uf = uf;
+        this.country = country;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

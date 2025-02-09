@@ -5,8 +5,8 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-@Data
 @Entity
+@Data
 @Table(name = "addresses")
 public class Address {
 
@@ -38,6 +38,6 @@ public class Address {
     @JoinColumn(name = "fk_city_id", nullable = false)
     private City city;
 
-    @Column(name = "created_at", nullable = false, updatable = false)
+    @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 }

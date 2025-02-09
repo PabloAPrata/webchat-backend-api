@@ -1,12 +1,19 @@
 package com.pabloprata.backend.webchat.domain;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Data
 @Entity
+@Data
+@NoArgsConstructor
 @Table(name = "gender")
 public class Gender {
+
+    public Gender(String name) {
+        this.name = name;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

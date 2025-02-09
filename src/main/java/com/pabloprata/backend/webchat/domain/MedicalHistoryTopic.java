@@ -5,8 +5,8 @@ import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
-@Data
 @Entity
+@Data
 @Table(name = "medical_history_topics")
 public class MedicalHistoryTopic {
 

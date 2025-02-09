@@ -4,8 +4,8 @@ import lombok.*;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "meeting_participants")
 @Data
+@Table(name = "meeting_participants")
 public class MeetingParticipant {
 
     @EmbeddedId

@@ -4,8 +4,8 @@ import lombok.*;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "concept_elements")
 @Data
+@Table(name = "concept_elements")
 public class ConceptElement {
 
     @Id

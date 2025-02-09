@@ -32,8 +32,6 @@ public class SignupController {
 
         PsychologistCreatedDTO psychologistCreatedDTO = psychologistService.signup(dto);
 
-
-
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/psychologist/{id}")

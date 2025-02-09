@@ -5,9 +5,8 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-
-@Data
 @Entity
+@Data
 @Table(name = "permissions")
 public class Permission {
 

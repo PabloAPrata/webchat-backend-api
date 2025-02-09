@@ -6,8 +6,8 @@ import jakarta.persistence.*;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "meetings")
 @Data
+@Table(name = "meetings")
 public class Meeting {
 
     @Id

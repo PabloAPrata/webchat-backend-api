@@ -26,7 +26,7 @@ public class MedicalHistoryService {
 
         Patient patient = patientRepository.findByUser_Id(userId).orElseThrow(() -> new EntityNotFoundException("Paciente não encontrado"));
 
-        if(medicalHistoryRepository.existsById(patient.getId().intValue())) {
+        if(medicalHistoryRepository.existsById(patient.getId())) {
             throw new AlreadyExistsException("O paciente já possui um histórico médico!");
         }
 

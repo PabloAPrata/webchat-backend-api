@@ -25,7 +25,7 @@ public class PsychologistFactory {
 
         String dataString = dto.dateBirth();
         DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        LocalDate date = LocalDate.parse(dataString, format); // Converte a string para LocalDate
+        LocalDate date = LocalDate.parse(dataString, format);
 
         User user = new User();
         user.setName(dto.firstName() + " " + dto.middleName() + " " + dto.lastName());

@@ -2,11 +2,17 @@ package com.pabloprata.backend.webchat.domain;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Data
 @Entity
+@Data
+@NoArgsConstructor
 @Table(name = "type_message")
 public class TypeMessage {
+
+    public TypeMessage(String name) {
+        this.name = name;
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

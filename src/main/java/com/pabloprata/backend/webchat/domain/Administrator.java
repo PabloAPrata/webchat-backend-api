@@ -5,8 +5,8 @@ import lombok.Data;
 
 import java.util.UUID;
 
-@Data
 @Entity
+@Data
 @Table(name = "administrators")
 public class Administrator {
 

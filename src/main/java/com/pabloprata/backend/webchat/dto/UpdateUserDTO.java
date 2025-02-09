@@ -2,9 +2,9 @@ package com.pabloprata.backend.webchat.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
-import java.util.Date;
 import java.util.UUID;
 
 public record UpdateUserDTO(
@@ -17,7 +17,8 @@ public record UpdateUserDTO(
 
         String image,
 
-        Date dateBirth,
+        @Pattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$", message = "{date.incorrect.pattern}")
+        String dateBirth,
 
         @NotBlank(message = "O telefone não pode estar vazio.")
         String phoneNumber,

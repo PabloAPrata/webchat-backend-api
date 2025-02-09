@@ -4,10 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(name = "role_permission")
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Table(name = "role_permission")
 public class RolePermission {
 
     @EmbeddedId

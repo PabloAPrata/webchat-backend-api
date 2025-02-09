@@ -12,7 +12,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface MedicalHistoryRepository extends JpaRepository<MedicalHistory, Integer> {
+public interface MedicalHistoryRepository extends JpaRepository<MedicalHistory, Long> {
 
 
     @Query("""

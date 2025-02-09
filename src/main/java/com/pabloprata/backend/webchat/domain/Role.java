@@ -5,10 +5,8 @@ import lombok.*;
 import java.time.LocalDateTime;
 
 @Entity
+@Data
 @Table(name = "roles")
-@Data  // Lombok generates getters, setters, toString, equals, and hashCode methods
-@NoArgsConstructor  // Lombok generates a no-args constructor
-@AllArgsConstructor // Lombok generates a constructor with all fields
 public class Role {
 
     @Id

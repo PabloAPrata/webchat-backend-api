@@ -4,8 +4,8 @@ import lombok.*;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "message_read")
 @Data
+@Table(name = "message_read")
 public class MessageRead {
 
     @EmbeddedId

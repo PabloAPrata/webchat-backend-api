@@ -3,13 +3,17 @@ package com.pabloprata.backend.webchat.domain;
 import jakarta.persistence.*;
 import lombok.Data;
 
-@Data
 @Entity
+@Data
 @Table(name = "marital_statuses")
 public class MaritalStatus {
 
+    public MaritalStatus(String name) {
+        this.name = name;
+    }
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(unique = true, nullable = false)
