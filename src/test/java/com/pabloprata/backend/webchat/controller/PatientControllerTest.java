@@ -1,5 +1,6 @@
 package com.pabloprata.backend.webchat.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pabloprata.backend.webchat.domain.*;
 import com.pabloprata.backend.webchat.dto.*;
 import com.pabloprata.backend.webchat.repository.*;
@@ -153,11 +154,11 @@ class PatientControllerTest {
     }
 
     private static MedicalHistoryDTO getMedicalHistoryDTO() {
-        ParentInfoDTO fatherInfoDTO = new ParentInfoDTO("João Mendes", 60, 2, 1, "Muito legal");
+        ParentInfoDTO fatherInfoDTO = new ParentInfoDTO("João Mendes", 60, "Ensino Médio", "Professor", "Muito legal");
 
-        ParentInfoDTO motherInfoDTO = new ParentInfoDTO("Maria Lima", 58, 1, 2, "Muito Chata");
+        ParentInfoDTO motherInfoDTO = new ParentInfoDTO("Maria Lima", 58, "Ensino Fundamental", "Engenheiro", "Muito Chata");
 
-        return new MedicalHistoryDTO(3, 1, 1, 3, fatherInfoDTO, motherInfoDTO);
+        return new MedicalHistoryDTO("Médico", "Solteiro(a)", "Catolicismo", "Graduação", fatherInfoDTO, motherInfoDTO);
     }
 
     @Test
@@ -177,7 +178,12 @@ class PatientControllerTest {
 
         var response = mvc.perform(get("/patient/" + patientCreatedDTO.id())).andReturn().getResponse();
 
+        PatientDetailsDTO actual = new ObjectMapper().readValue(response.getContentAsString(), PatientDetailsDTO.class);
+
         assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
+//        assertThat(actual.name()).isEqualTo("Liz  Pinto");
+//        assertThat(actual.email()).isEqualTo("liz_sara_pinto@ipek.net.br");
+//        assertThat(actual.number()).isEqualTo("+5596997585689");
 
     }
 

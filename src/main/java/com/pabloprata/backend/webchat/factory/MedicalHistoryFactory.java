@@ -2,7 +2,7 @@ package com.pabloprata.backend.webchat.factory;
 
 import com.pabloprata.backend.webchat.domain.MedicalHistory;
 import com.pabloprata.backend.webchat.dto.MedicalHistoryResponseDTO;
-import com.pabloprata.backend.webchat.dto.ParentalInfoResponseDTO;
+import com.pabloprata.backend.webchat.dto.ParentInfoDTO;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -11,7 +11,7 @@ public class MedicalHistoryFactory {
 
     public MedicalHistoryResponseDTO convertEntityToDto(MedicalHistory medicalHistoryEntity) {
 
-        ParentalInfoResponseDTO fatherInfo = new ParentalInfoResponseDTO(
+        ParentInfoDTO fatherInfo = new ParentInfoDTO(
                 medicalHistoryEntity.getFathersName(),
                 medicalHistoryEntity.getFathersAge(),
                 medicalHistoryEntity.getFathersEducation() != null ? medicalHistoryEntity.getFathersEducation().getName() : null,
@@ -19,7 +19,7 @@ public class MedicalHistoryFactory {
                 medicalHistoryEntity.getFatherNotes()
         );
 
-        ParentalInfoResponseDTO mothersInfo = new ParentalInfoResponseDTO(
+        ParentInfoDTO mothersInfo = new ParentInfoDTO(
                 medicalHistoryEntity.getMothersName(),
                 medicalHistoryEntity.getMothersAge(),
                 medicalHistoryEntity.getMothersEducation() != null ? medicalHistoryEntity.getMothersEducation().getName() : null,
@@ -28,6 +28,7 @@ public class MedicalHistoryFactory {
         );
 
         return new MedicalHistoryResponseDTO(
+                medicalHistoryEntity.getPatient().getUser().getId(),
                 medicalHistoryEntity.getPatientOccupation() != null ? medicalHistoryEntity.getPatientOccupation().getName() : null,
                 medicalHistoryEntity.getPatientMaritalStatus() != null ? medicalHistoryEntity.getPatientMaritalStatus().getName() : null,
                 medicalHistoryEntity.getPatientReligion() != null ? medicalHistoryEntity.getPatientReligion().getName() : null,

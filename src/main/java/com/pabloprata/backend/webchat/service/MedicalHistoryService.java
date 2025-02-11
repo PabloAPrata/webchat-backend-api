@@ -21,10 +21,14 @@ public class MedicalHistoryService {
 
     private final MedicalHistoryRepository medicalHistoryRepository;
     private final MedicalHistoryFactory factory;
+    private final EducationService educationService;
+    private final MaritalStatusService maritalStatusService;
+    private final OccupationService occupationService;
+    private final ReligionService religionService;
     private final PatientRepository patientRepository;
 
     @Transactional
-    public void createMedicalHistory(UUID userId, @Valid MedicalHistoryDTO anamneseDTO) {
+    public MedicalHistoryResponseDTO createMedicalHistory(UUID userId, @Valid MedicalHistoryDTO anamneseDTO) {
 
         Patient patient = patientRepository.findByUser_Id(userId).orElseThrow(() -> new EntityNotFoundException("Paciente não encontrado"));
 
@@ -34,29 +38,43 @@ public class MedicalHistoryService {
 
         medicalHistoryRepository.insertMedicalHistory(
                 patient.getId(),
-                anamneseDTO.patientOccupation(),
-                anamneseDTO.patientMarital(),
-                anamneseDTO.patientReligion(),
-                anamneseDTO.patientEducation(),
+                occupationService.getOrCreateOccupation(anamneseDTO.patientOccupation()),
+                maritalStatusService.getOrCreateMaritalStatus(anamneseDTO.patientMarital()),
+                religionService.getOrCreateReligion(anamneseDTO.patientReligion()),
+                educationService.getOrCreateEducationLevel(anamneseDTO.patientEducation()),
                 anamneseDTO.father().parentName(),
                 anamneseDTO.father().parentAge(),
-                anamneseDTO.father().parentEducation(),
-                anamneseDTO.father().parentOccupation(),
+                educationService.getOrCreateEducationLevel(anamneseDTO.father().parentEducation()),
+                occupationService.getOrCreateOccupation(anamneseDTO.father().parentOccupation()),
                 anamneseDTO.mother().parentName(),
                 anamneseDTO.mother().parentAge(),
-                anamneseDTO.mother().parentEducation(),
-                anamneseDTO.mother().parentOccupation(),
+                educationService.getOrCreateEducationLevel(anamneseDTO.mother().parentEducation()),
+                occupationService.getOrCreateOccupation(anamneseDTO.mother().parentOccupation()),
                 anamneseDTO.father().parentNotes(),
                 anamneseDTO.mother().parentNotes()
         );
 
+        return new MedicalHistoryResponseDTO(
+                userId,
+                anamneseDTO.patientOccupation(),
+                anamneseDTO.patientMarital(),
+                anamneseDTO.patientReligion(),
+                anamneseDTO.patientEducation(),
+                anamneseDTO.father(),
+                anamneseDTO.mother()
+        );
     }
 
-
+    @Transactional(readOnly = true)
     public MedicalHistoryResponseDTO getMedicalHistoryByUserId (UUID userId){
 
         MedicalHistory medicalHistory = medicalHistoryRepository.findByUserId(userId).orElseThrow(() -> new EntityNotFoundException("Histórico médico não encontrado"));
 
         return factory.convertEntityToDto(medicalHistory);
     }
+
+
+
+
+
 }

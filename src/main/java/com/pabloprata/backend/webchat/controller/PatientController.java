@@ -10,7 +10,9 @@ import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.UUID;
 
 @RestController
@@ -35,16 +37,25 @@ public class PatientController {
         return ResponseEntity.noContent().build();
     }
 
+    @PostMapping("/{userId}/medical-history")
+    public ResponseEntity<MedicalHistoryResponseDTO> createMedicalHistory(@PathVariable UUID userId, @RequestBody MedicalHistoryDTO anamneseDTO) {
+
+        MedicalHistoryResponseDTO medicalHistoryResponseDTO = medicalHistoryService.createMedicalHistory(userId, anamneseDTO);
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/patient/{id}/medical-history")
+                .buildAndExpand(medicalHistoryResponseDTO.userId())
+                .toUri();
+
+        return ResponseEntity.created(location).body(medicalHistoryResponseDTO);
+    }
+
     @GetMapping("/{userId}/medical-history")
     public ResponseEntity<MedicalHistoryResponseDTO> getMedicalHistory(@PathVariable UUID userId) {
         MedicalHistoryResponseDTO medicalHistory = medicalHistoryService.getMedicalHistoryByUserId(userId);
         return ResponseEntity.ok(medicalHistory);
     }
 
-    @PostMapping("/{userId}/medical-history")
-    public ResponseEntity<Void> createMedicalHistory(@PathVariable UUID userId, @RequestBody @Valid MedicalHistoryDTO anamneseDTO) {
-        medicalHistoryService.createMedicalHistory(userId, anamneseDTO);
-        return ResponseEntity.noContent().build();
-    }
 }
 

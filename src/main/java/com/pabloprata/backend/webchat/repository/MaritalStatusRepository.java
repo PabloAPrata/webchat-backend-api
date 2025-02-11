@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MaritalStatusRepository extends JpaRepository<MaritalStatus, Long> {
+    MaritalStatus findByName(String name);
 }

@@ -1,10 +1,10 @@
 package com.pabloprata.backend.webchat.dto;
 
 public record MedicalHistoryDTO(
-        Integer patientOccupation,
-        Integer patientMarital,
-        Integer patientReligion,
-        Integer patientEducation,
+        String patientOccupation,
+        String patientMarital,
+        String patientReligion,
+        String patientEducation,
         ParentInfoDTO father,
         ParentInfoDTO mother
 ) {
