@@ -25,28 +25,35 @@ public interface MedicalHistoryRepository extends JpaRepository<MedicalHistory, 
 
     @Modifying
     @Transactional
-    @Query("""
-                INSERT INTO MedicalHistory (
-                    patientId, patientOccupation, patientMaritalStatus, patientReligion, patientEducation,
-                    fathersName, fathersAge, fathersEducation, fathersOccupation,
-                    mothersName, mothersAge, mothersEducation, mothersOccupation,
-                    fatherNotes, motherNotes
-                )
-                SELECT :patientId, o, m, r, e,
-                       :fathersName, :fathersAge, fe, fo,
-                       :mothersName, :mothersAge, me, mo,
-                       :fatherNotes, :motherNotes
-                FROM Occupation o, MaritalStatus m, Religion r, EducationLevel e,
-                     EducationLevel fe, Occupation fo, EducationLevel me, Occupation mo
-                WHERE o.id = :patientOccupationId
-                  AND m.id = :patientMaritalId
-                  AND r.id = :patientReligionId
-                  AND e.id = :patientEducationId
-                  AND fe.id = COALESCE(:fathersEducationId, fe.id)
-                  AND fo.id = COALESCE(:fathersOccupationId, fo.id)
-                  AND me.id = COALESCE(:mothersEducationId, me.id)
-                  AND mo.id = COALESCE(:mothersOccupationId, mo.id)
-            """)
-    void insertMedicalHistory(@Param("patientId") Long patientId, @Param("patientOccupationId") Integer patientOccupationId, @Param("patientMaritalId") Integer patientMaritalId, @Param("patientReligionId") Integer patientReligionId, @Param("patientEducationId") Integer patientEducationId, @Param("fathersName") String fathersName, @Param("fathersAge") Integer fathersAge, @Param("fathersEducationId") Integer fathersEducationId, @Param("fathersOccupationId") Integer fathersOccupationId, @Param("mothersName") String mothersName, @Param("mothersAge") Integer mothersAge, @Param("mothersEducationId") Integer mothersEducationId, @Param("mothersOccupationId") Integer mothersOccupationId, @Param("fatherNotes") String fatherNotes, @Param("motherNotes") String motherNotes);
+    @Query(value = """
+    INSERT INTO medical_history (
+        fk_patient_id, fk_patient_occupation_id, fk_patient_marital_id, fk_patient_religion_id, fk_patient_education_id,
+        fathers_name, fathers_age, fk_fathers_education_id, fk_fathers_occupation_id,
+        mothers_name, mothers_age, fk_mothers_education_id, fk_mothers_occupation_id,
+        father_notes, mother_notes
+    ) VALUES (
+        :patientId, :patientOccupationId, :patientMaritalId, :patientReligionId, :patientEducationId,
+        :fathersName, :fathersAge, :fathersEducationId, :fathersOccupationId,
+        :mothersName, :mothersAge, :mothersEducationId, :mothersOccupationId,
+        :fatherNotes, :motherNotes
+    )
+    """, nativeQuery = true)
+    void insertMedicalHistory(
+            @Param("patientId") Long patientId,
+            @Param("patientOccupationId") Integer patientOccupationId,
+            @Param("patientMaritalId") Integer patientMaritalId,
+            @Param("patientReligionId") Integer patientReligionId,
+            @Param("patientEducationId") Integer patientEducationId,
+            @Param("fathersName") String fathersName,
+            @Param("fathersAge") Integer fathersAge,
+            @Param("fathersEducationId") Integer fathersEducationId,
+            @Param("fathersOccupationId") Integer fathersOccupationId,
+            @Param("mothersName") String mothersName,
+            @Param("mothersAge") Integer mothersAge,
+            @Param("mothersEducationId") Integer mothersEducationId,
+            @Param("mothersOccupationId") Integer mothersOccupationId,
+            @Param("fatherNotes") String fatherNotes,
+            @Param("motherNotes") String motherNotes
+    );
 
 }

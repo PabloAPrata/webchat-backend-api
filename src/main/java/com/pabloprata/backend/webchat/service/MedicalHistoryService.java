@@ -10,6 +10,7 @@ import jakarta.persistence.EntityNotFoundException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 
 import java.util.UUID;
@@ -22,6 +23,7 @@ public class MedicalHistoryService {
     private final MedicalHistoryFactory factory;
     private final PatientRepository patientRepository;
 
+    @Transactional
     public void createMedicalHistory(UUID userId, @Valid MedicalHistoryDTO anamneseDTO) {
 
         Patient patient = patientRepository.findByUser_Id(userId).orElseThrow(() -> new EntityNotFoundException("Paciente não encontrado"));

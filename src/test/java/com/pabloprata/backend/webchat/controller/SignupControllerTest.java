@@ -96,15 +96,6 @@ class SignupControllerTest {
         assertThat(response.getStatus()).isEqualTo(HttpStatus.BAD_REQUEST.value());
     }
 
-//    @Test
-//    @DisplayName("Paciente: Deve devolver código http 400 quando não possui body.")
-//    @WithMockUser
-//    void createPatient_case_01() throws Exception {
-//        var response = mvc.perform(post("/signup/patient")).andReturn().getResponse();
-//
-//        assertThat(response.getStatus()).isEqualTo(HttpStatus.BAD_REQUEST.value());
-//    }
-
     @Test
     @DisplayName("Paciente: Deve devolver código http 201 quando as informações estão válidas e cadastro é bem sucedido")
     @WithMockUser

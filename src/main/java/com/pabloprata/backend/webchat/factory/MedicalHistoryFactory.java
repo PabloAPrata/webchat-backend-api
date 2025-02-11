@@ -14,25 +14,27 @@ public class MedicalHistoryFactory {
         ParentalInfoResponseDTO fatherInfo = new ParentalInfoResponseDTO(
                 medicalHistoryEntity.getFathersName(),
                 medicalHistoryEntity.getFathersAge(),
-                medicalHistoryEntity.getFathersEducation().getName(),
-                medicalHistoryEntity.getFathersOccupation().getName(),
-                medicalHistoryEntity.getFatherNotes());
+                medicalHistoryEntity.getFathersEducation() != null ? medicalHistoryEntity.getFathersEducation().getName() : null,
+                medicalHistoryEntity.getFathersOccupation() != null ? medicalHistoryEntity.getFathersOccupation().getName() : null,
+                medicalHistoryEntity.getFatherNotes()
+        );
 
         ParentalInfoResponseDTO mothersInfo = new ParentalInfoResponseDTO(
                 medicalHistoryEntity.getMothersName(),
                 medicalHistoryEntity.getMothersAge(),
-                medicalHistoryEntity.getMothersEducation().getName(),
-                medicalHistoryEntity.getMothersEducation().getName(),
-                medicalHistoryEntity.getMotherNotes());
-
+                medicalHistoryEntity.getMothersEducation() != null ? medicalHistoryEntity.getMothersEducation().getName() : null,
+                medicalHistoryEntity.getMothersOccupation() != null ? medicalHistoryEntity.getMothersOccupation().getName() : null,
+                medicalHistoryEntity.getMotherNotes()
+        );
 
         return new MedicalHistoryResponseDTO(
-                medicalHistoryEntity.getPatientOccupation().getName(),
-                medicalHistoryEntity.getPatientMaritalStatus().getName(),
-                medicalHistoryEntity.getPatientReligion().getName(),
-                medicalHistoryEntity.getPatientEducation().getName(),
+                medicalHistoryEntity.getPatientOccupation() != null ? medicalHistoryEntity.getPatientOccupation().getName() : null,
+                medicalHistoryEntity.getPatientMaritalStatus() != null ? medicalHistoryEntity.getPatientMaritalStatus().getName() : null,
+                medicalHistoryEntity.getPatientReligion() != null ? medicalHistoryEntity.getPatientReligion().getName() : null,
+                medicalHistoryEntity.getPatientEducation() != null ? medicalHistoryEntity.getPatientEducation().getName() : null,
                 fatherInfo,
                 mothersInfo
         );
     }
+
 }
