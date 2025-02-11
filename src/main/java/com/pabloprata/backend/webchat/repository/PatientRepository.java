@@ -36,22 +36,21 @@ public interface PatientRepository extends JpaRepository<Patient, Long> {
             @Param("cpf") String cpf
     );
 
-    // Retorna os detalhes do paciente baseado no ID do usuário
     @Query("""
-                SELECT new com.pabloprata.backend.webchat.dto.PatientDetailsDTO(
-                    u.name, u.email, u.telephone, g.name, p.patientStatus,
-                    a.street, a.number, a.complement, a.district, a.zipCode,
-                    c.name, s.name, co.name
-                )
-                FROM Patient p
-                JOIN p.user u
-                JOIN u.gender g
-                LEFT JOIN Address a ON a.user.id = u.id
-                LEFT JOIN City c ON a.city.id = c.id
-                LEFT JOIN State s ON c.state.id = s.id
-                LEFT JOIN Country co ON s.country.id = co.id
-                WHERE u.id = :userId
-            """)
+    SELECT new com.pabloprata.backend.webchat.dto.PatientDetailsDTO(
+        u.name, u.email, u.telephone, g.name, p.patientStatus,
+        a.street, a.number, a.complement, a.district, a.zipCode,
+        c.name, s.name, co.name
+    )
+    FROM Patient p
+    JOIN p.user u
+    JOIN u.gender g
+    LEFT JOIN Address a ON a.user = u
+    LEFT JOIN a.city c
+    LEFT JOIN c.state s
+    LEFT JOIN s.country co
+    WHERE p.user.id = :userId
+    """)
     Optional<PatientDetailsDTO> findPatientDetailsByUserId(@Param("userId") UUID userId);
 
 

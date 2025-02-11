@@ -138,11 +138,11 @@ class PatientControllerTest {
         List<MaritalStatus> maritalStatuses = List.of(new MaritalStatus("Solteiro(a)"), new MaritalStatus("Casado(a)"), new MaritalStatus("Divorciado(a)"), new MaritalStatus("Viúvo(a)"), new MaritalStatus("União Estável"));
         maritalStatusRepository.saveAll(maritalStatuses);
 
-        PsychologistSignUpDTO psychologistSignUpDTO = new PsychologistSignUpDTO("Valdeci", "Maria", "Santos", "933.632.086-69", "ES/9876", "+5511992480811", "valdeci.alves.1939@gmail.com", "1939-01-07", 2, "password@123");
+        PsychologistSignUpDTO psychologistSignUpDTO = new PsychologistSignUpDTO("Valdeci Maria Santos", "933.632.086-69", "ES/9876", "+5511992480811", "valdeci.alves.1939@gmail.com", "1939-01-07", 2, "password@123");
 
         PsychologistCreatedDTO psychologistCreated = psychologistService.signup(psychologistSignUpDTO);
 
-        PatientSignUpDTO patientSignUpDTO = new PatientSignUpDTO(psychologistCreated.id(), "Pedro", "Augusto", "Brito", "101.737.648-43", "+552126155590", "pedro_augusto_brito@procivil.com.br", "1961-01-07", 1);
+        PatientSignUpDTO patientSignUpDTO = new PatientSignUpDTO(psychologistCreated.id(), "Pedro Augusto Brito", "101.737.648-43", "+552126155590", "pedro_augusto_brito@procivil.com.br", "1961-01-07", 1);
 
         PatientCreatedDTO patientCreated = patientService.signup(patientSignUpDTO);
 
@@ -170,10 +170,10 @@ class PatientControllerTest {
         //Primeiro criamos um psicólogo,
         // para poder gerar um paciente,
         // para depois buscar os detalhes
-        var psyDTO = new PsychologistSignUpDTO("Allana", "Antonella", "Gomes", "170.999.987-06", "SP/12775", "+5581993941371", "allana-gomes76@jp.ind.br", "1997-01-14", 2, "Senha@123");
+        var psyDTO = new PsychologistSignUpDTO("Allana Antonella Gomes", "170.999.987-06", "SP/12775", "+5581993941371", "allana-gomes76@jp.ind.br", "1997-01-14", 2, "Senha@123");
         PsychologistCreatedDTO psychologistCreatedDTO = psychologistService.signup(psyDTO);
 
-        var patientDTO = new PatientSignUpDTO(psychologistCreatedDTO.id(), "Liz", "Sara", "Pinto", "310.333.036-74", "+5596997585689", "liz_sara_pinto@ipek.net.br", "1999-07-03", 2);
+        var patientDTO = new PatientSignUpDTO(psychologistCreatedDTO.id(), "Liz Sara Pinto", "310.333.036-74", "+5596997585689", "liz_sara_pinto@ipek.net.br", "1999-07-03", 2);
         PatientCreatedDTO patientCreatedDTO = patientService.signup(patientDTO);
 
         var response = mvc.perform(get("/patient/" + patientCreatedDTO.id())).andReturn().getResponse();
@@ -181,9 +181,9 @@ class PatientControllerTest {
         PatientDetailsDTO actual = new ObjectMapper().readValue(response.getContentAsString(), PatientDetailsDTO.class);
 
         assertThat(response.getStatus()).isEqualTo(HttpStatus.OK.value());
-//        assertThat(actual.name()).isEqualTo("Liz  Pinto");
-//        assertThat(actual.email()).isEqualTo("liz_sara_pinto@ipek.net.br");
-//        assertThat(actual.number()).isEqualTo("+5596997585689");
+        assertThat(actual.name()).isEqualTo("Liz Sara Pinto");
+        assertThat(actual.email()).isEqualTo("liz_sara_pinto@ipek.net.br");
+        assertThat(actual.telephone()).isEqualTo("+5596997585689");
 
     }
 

@@ -37,7 +37,7 @@ public class PatientFactory {
         LocalDate date = LocalDate.parse(dataString, format);
 
         User user = new User();
-        user.setName(dto.firstName() + " " + " " + dto.lastName());
+        user.setName(dto.name());
         user.setCpf(dto.cpf());
         user.setTelephone(dto.phoneNumber());
         user.setEmail(dto.email());
@@ -51,19 +51,9 @@ public class PatientFactory {
     }
 
     public PatientCreatedDTO convertEntityToCreatedDto(Patient patient) {
-
-        String fullName = patient.getUser().getName();
-        String[] nameParts = fullName.split(" ", 3);
-
-        int nameLength = nameParts.length;
-
-        String firstName = nameLength > 0 ? nameParts[0] : "";
-        String lastName = nameLength > 1 ? nameParts[nameLength - 1] : "";
-
         return new PatientCreatedDTO(
                 patient.getUser().getId(),
-                firstName,
-                lastName,
+                patient.getUser().getName(),
                 patient.getUser().getTelephone(),
                 patient.getUser().getEmail()
         );

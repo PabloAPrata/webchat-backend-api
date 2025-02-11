@@ -44,7 +44,7 @@ public class PatientController {
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
-                .path("/patient/{id}/medical-history")
+                .path("/{id}")
                 .buildAndExpand(medicalHistoryResponseDTO.userId())
                 .toUri();
 

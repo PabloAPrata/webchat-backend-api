@@ -4,6 +4,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
+import org.hibernate.validator.constraints.br.CPF;
 
 import java.util.UUID;
 
@@ -11,8 +12,8 @@ public record UpdateUserDTO(
 
         UUID id,
 
-        @NotBlank(message = "O nome não pode estar vazio.")
-        @Size(min = 2, max = 50, message = "O nome precisa ter entre 2 e 50 caracteres.")
+        @NotBlank(message = "{name.mandatory}")
+        @Size(min = 2, max = 50, message = "{name.incorrect.pattern}")
         String name,
 
         String image,
@@ -20,11 +21,14 @@ public record UpdateUserDTO(
         @Pattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$", message = "{date.incorrect.pattern}")
         String dateBirth,
 
-        @NotBlank(message = "O telefone não pode estar vazio.")
+        @NotBlank(message = "{phone.mandatory}")
         String phoneNumber,
 
+        @NotBlank(message = "{cpf.mandatory}")
+        @CPF
+        String cpf,
 
-        @NotBlank(message = "Email é requerido.")
-        @Email(message = "Email no formato errado.")
+        @NotBlank(message = "{email.mandatory}")
+        @Email(message = "{email.incorrect.pattern}")
         String email
 ) {}

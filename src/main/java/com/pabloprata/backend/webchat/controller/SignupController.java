@@ -33,7 +33,7 @@ public class SignupController {
         PsychologistCreatedDTO psychologistCreatedDTO = psychologistService.signup(dto);
 
         URI location = ServletUriComponentsBuilder
-                .fromCurrentRequest()
+                .fromCurrentContextPath()
                 .path("/psychologist/{id}")
                 .buildAndExpand(psychologistCreatedDTO.id())
                 .toUri();
@@ -47,7 +47,7 @@ public class SignupController {
         PatientCreatedDTO patientCreatedDTO = patientService.signup(dto);
 
         URI location = ServletUriComponentsBuilder
-                .fromCurrentRequest()
+                .fromCurrentContextPath()
                 .path("/patient/{id}")
                 .buildAndExpand(patientCreatedDTO.id())
                 .toUri();

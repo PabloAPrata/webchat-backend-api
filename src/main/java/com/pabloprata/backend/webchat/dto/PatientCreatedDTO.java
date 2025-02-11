@@ -5,9 +5,7 @@ import java.util.UUID;
 public record PatientCreatedDTO(
         UUID id,
 
-        String firstName,
-
-        String lastName,
+        String name,
 
         String phoneNumber,
 

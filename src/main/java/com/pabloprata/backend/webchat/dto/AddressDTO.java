@@ -27,5 +27,7 @@ public record AddressDTO(
 
         @NotBlank(message = "{country.name.mandatory}")
         String country
+
+
 ) {
 }

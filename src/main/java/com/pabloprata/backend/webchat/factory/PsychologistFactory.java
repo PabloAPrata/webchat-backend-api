@@ -28,7 +28,7 @@ public class PsychologistFactory {
         LocalDate date = LocalDate.parse(dataString, format);
 
         User user = new User();
-        user.setName(dto.firstName() + " " + dto.middleName() + " " + dto.lastName());
+        user.setName(dto.name());
         user.setCpf(dto.cpf());
         user.setTelephone(dto.phoneNumber());
         user.setEmail(dto.email());
@@ -45,15 +45,6 @@ public class PsychologistFactory {
 
 
     public PsychologistCreatedDTO convertEntityToResponse(Psychologist psychologist) {
-
-        String fullName = psychologist.getUser().getName();
-        String[] nameParts = fullName.split(" ", 3);
-
-        int nameLength = nameParts.length;
-
-        String firstName = nameLength > 0 ? nameParts[0] : "";
-        String lastName = nameLength > 1 ? nameParts[nameLength - 1] : "";
-
-        return new PsychologistCreatedDTO(psychologist.getUser().getId(), firstName, lastName, psychologist.getCrp(), psychologist.getUser().getTelephone(), psychologist.getUser().getEmail());
+        return new PsychologistCreatedDTO(psychologist.getUser().getId(), psychologist.getUser().getName(), psychologist.getCrp(), psychologist.getUser().getTelephone(), psychologist.getUser().getEmail());
     }
 }

@@ -20,4 +20,5 @@ public interface UserRepository extends JpaRepository<User, UUID> {
     @Query("UPDATE User u SET u.name = :name, u.profileImg = :profileImg, u.dateBirth = :dateBirth, " +
             "u.telephone = :phoneNumber, u.email = :email WHERE u.id = :id")
     int updateUser(UUID id, String name, String profileImg, LocalDate dateBirth, String phoneNumber, String email);
+
 }

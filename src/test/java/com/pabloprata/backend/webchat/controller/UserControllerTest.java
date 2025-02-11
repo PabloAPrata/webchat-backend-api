@@ -48,7 +48,7 @@ class UserControllerTest {
     @Transactional
     void updateUser() throws Exception {
 
-        var psyDTO = new PsychologistSignUpDTO("Mirella", "Heloise", "Peixoto", "124.006.043-20", "SP/12345", "+5527984427820", "mirella.heloise.peixoto@origembr.com", "1999-09-24", 2, "Senha@123");
+        var psyDTO = new PsychologistSignUpDTO("Mirella Heloise Peixoto", "124.006.043-20", "SP/12345", "+5527984427820", "mirella.heloise.peixoto@origembr.com", "1999-09-24", 2, "Senha@123");
 
         PsychologistCreatedDTO psychologist = psychologistService.signup(psyDTO);
 
@@ -58,6 +58,7 @@ class UserControllerTest {
                 null,
                 "1999-09-28",
                 "+5511992480831",
+                "133.158.337-37",
                 "pabloalmeidaprata@hotmail.com"
 
         )).getJson())).andReturn().getResponse();

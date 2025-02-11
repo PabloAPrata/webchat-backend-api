@@ -73,13 +73,12 @@ class SignupControllerTest {
     @WithMockUser
     @Transactional
     void createPsychologist_case_02() throws Exception {
-        var response = mvc.perform(post("/signup/psychologist").contentType(MediaType.APPLICATION_JSON).content(psychologistSignUpDTOJson.write(new PsychologistSignUpDTO("Mirella", "Heloise", "Peixoto", "124.006.043-20", "SP/12345", "+5527984427820", "mirella.heloise.peixoto@origembr.com", "1999-09-24", 2, "Senha@123")).getJson())).andReturn().getResponse();
+        var response = mvc.perform(post("/signup/psychologist").contentType(MediaType.APPLICATION_JSON).content(psychologistSignUpDTOJson.write(new PsychologistSignUpDTO("Mirella Heloise Peixoto", "124.006.043-20", "SP/12345", "+5527984427820", "mirella.heloise.peixoto@origembr.com", "1999-09-24", 2, "Senha@123")).getJson())).andReturn().getResponse();
 
         PsychologistCreatedDTO actual = new ObjectMapper().readValue(response.getContentAsString(), PsychologistCreatedDTO.class);
 
         assertThat(response.getStatus()).isEqualTo(HttpStatus.CREATED.value());
-        assertThat(actual.firstName()).isEqualTo("Mirella");
-        assertThat(actual.lastName()).isEqualTo("Peixoto");
+        assertThat(actual.name()).isEqualTo("Mirella Heloise Peixoto");
         assertThat(actual.crp()).isEqualTo("SP/12345");
         assertThat(actual.phoneNumber()).isEqualTo("+5527984427820");
         assertThat(actual.email()).isEqualTo("mirella.heloise.peixoto@origembr.com");
@@ -102,19 +101,18 @@ class SignupControllerTest {
     @Transactional
     void createPatient_case_02() throws Exception {
 
-        var psyDTO = new PsychologistSignUpDTO("Mirella", "Heloise", "Peixoto", "132.350.148-70", "SP/12345", "+5527984427820", "mirella.heloise.peixoto@origembr.com", "1999-09-24", 2, "Senha@123");
+        var psyDTO = new PsychologistSignUpDTO("Mirella Heloise Peixoto", "132.350.148-70", "SP/12345", "+5527984427820", "mirella.heloise.peixoto@origembr.com", "1999-09-24", 2, "Senha@123");
 
         PsychologistCreatedDTO psychologist = psychologistService.signup(psyDTO);
 
-        var patientDTO = new PatientSignUpDTO(psychologist.id(), "Giovanna", "Jéssica", "Campos", "493.284.993-13", "+5592999884836", "giovanna-campos83@tonyveiculos.com.br", "1985-07-03", 2);
+        var patientDTO = new PatientSignUpDTO(psychologist.id(), "Giovanna Jéssica Campos", "493.284.993-13", "+5592999884836", "giovanna-campos83@tonyveiculos.com.br", "1985-07-03", 2);
 
         var response = mvc.perform(post("/signup/patient").contentType(MediaType.APPLICATION_JSON).content(patientSignUpDTOJson.write(patientDTO).getJson())).andReturn().getResponse();
 
         PatientCreatedDTO actual = new ObjectMapper().readValue(response.getContentAsString(), PatientCreatedDTO.class);
 
         assertThat(actual.id()).isNotNull();
-        assertThat(actual.firstName()).isEqualTo("Giovanna");
-        assertThat(actual.lastName()).isEqualTo("Campos");
+        assertThat(actual.name()).isEqualTo("Giovanna Jéssica Campos");
         assertThat(actual.phoneNumber()).isEqualTo("+5592999884836");
         assertThat(actual.email()).isEqualTo("giovanna-campos83@tonyveiculos.com.br");
         assertThat(response.getStatus()).isEqualTo(HttpStatus.CREATED.value());

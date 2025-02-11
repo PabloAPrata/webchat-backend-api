@@ -10,16 +10,9 @@ public record PatientSignUpDTO(
         @NotNull(message = "{psychologistId.mandatory}")
         UUID PsychologistId,
 
-        @NotBlank(message = "{firstName.mandatory}")
-        @Size(min = 2, max = 50, message = "{firstName.incorrect.pattern}")
-        String firstName,
-
-        @Size(min = 3, max = 50, message = "{middleName.incorrect.pattern}")
-        String middleName,
-
-        @NotBlank(message = "{lastName.mandatory}")
-        @Size(min = 2, max = 50, message = "{lastName.incorrect.pattern}")
-        String lastName,
+        @NotBlank(message = "{name.mandatory}")
+        @Size(min = 2, max = 50, message = "{name.incorrect.pattern}")
+        String name,
 
         @NotBlank(message = "{cpf.mandatory}")
         @CPF
