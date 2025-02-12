@@ -13,6 +13,10 @@ public class ReligionService {
 
     public Integer getOrCreateReligion(String religionName) {
 
+        if (religionName == null || religionName.isBlank()) {
+            religionName = "Indefinido";
+        }
+
         Religion existingReligion = religionRepository.findByName(religionName);
 
         if (existingReligion != null) {

@@ -16,6 +16,10 @@ public class CityService {
 
     public City getOrCreateCity(String cityName, StateDTO stateDto, String countryName) {
 
+        if (cityName == null || cityName.isBlank()) {
+            cityName = "Indefinido";
+        }
+
         City existingCity = cityRepository.findByName(cityName);
 
         if (existingCity != null) {

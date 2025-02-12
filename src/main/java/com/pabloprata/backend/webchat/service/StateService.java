@@ -18,6 +18,8 @@ public class StateService {
 
     public State getOrCreateState(StateDTO stateDto, String countryName) {
 
+        stateDto = validateState(stateDto);
+
         State existingState = stateRepository.findByName(stateDto.name());
 
         if (existingState != null) {
@@ -30,5 +32,18 @@ public class StateService {
         newState = stateRepository.save(newState);
 
         return newState;
+    }
+
+    private StateDTO validateState(StateDTO stateDto) {
+
+        if (stateDto == null || stateDto.name() == null || stateDto.name().isBlank()) {
+            stateDto = new StateDTO("Indefinido", "Nd");
+        }
+
+        if (stateDto.UF() == null || stateDto.UF().isBlank()) {
+            stateDto = new StateDTO("Indefinido", "Nd");
+        }
+
+        return stateDto;
     }
 }

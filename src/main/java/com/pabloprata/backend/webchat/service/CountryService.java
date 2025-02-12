@@ -13,6 +13,10 @@ public class CountryService {
 
     public Country getOrCreateCountry(String countryName) {
 
+        if (countryName == null || countryName.isBlank()) {
+            countryName = "Indefinido";
+        }
+
         Country existingCountry = countryRepository.findByName(countryName);
 
         if (existingCountry != null) {

@@ -13,6 +13,10 @@ public class EducationService {
 
     public Integer getOrCreateEducationLevel(String educationLevelName) {
 
+        if (educationLevelName == null || educationLevelName.isBlank()) {
+            educationLevelName = "Indefinido";
+        }
+
         EducationLevel existingEducationLevel = educationLevelRepository.findByName(educationLevelName);
 
         if (existingEducationLevel != null) {

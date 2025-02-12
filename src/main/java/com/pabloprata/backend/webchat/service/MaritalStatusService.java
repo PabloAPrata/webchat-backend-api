@@ -12,6 +12,10 @@ public class MaritalStatusService {
 
     public Integer getOrCreateMaritalStatus(String maritalStatusName) {
 
+        if (maritalStatusName == null || maritalStatusName.isBlank()) {
+            maritalStatusName = "Indefinido";
+        }
+
         MaritalStatus existingOccupation = maritalStatusRepository.findByName(maritalStatusName);
 
         if (existingOccupation != null) {

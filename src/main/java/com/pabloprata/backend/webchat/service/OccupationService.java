@@ -13,6 +13,10 @@ public class OccupationService {
 
     public Integer getOrCreateOccupation(String occupationName) {
 
+        if (occupationName == null || occupationName.isBlank()) {
+            occupationName = "Indefinido";
+        }
+
         Occupation existingOccupation = occupationRepository.findByName(occupationName);
 
         if (existingOccupation != null) {
