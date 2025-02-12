@@ -50,6 +50,9 @@ public interface PatientRepository extends JpaRepository<Patient, Long> {
     LEFT JOIN c.state s
     LEFT JOIN s.country co
     WHERE p.user.id = :userId
+    AND a.id = (
+        SELECT MAX(a2.id) FROM Address a2 WHERE a2.user = u
+    )
     """)
     Optional<PatientDetailsDTO> findPatientDetailsByUserId(@Param("userId") UUID userId);
 

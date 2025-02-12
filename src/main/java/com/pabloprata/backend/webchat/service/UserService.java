@@ -55,7 +55,7 @@ public class UserService {
         address.setNumber(dto.number());
         address.setComplement(dto.complement());
         address.setDistrict(dto.district());
-        address.setZipCode(dto.zip_code());
+        address.setZipCode(dto.zipCode());
         address.setCity(city);
 
         Address newAddress = addressRepository.save(address);

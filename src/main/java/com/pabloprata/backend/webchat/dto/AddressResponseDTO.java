@@ -12,7 +12,7 @@ public record AddressResponseDTO(
 
         String district,
 
-        String zip_code,
+        String zipCode,
 
         String city,
 
