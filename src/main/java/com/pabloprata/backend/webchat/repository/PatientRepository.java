@@ -42,21 +42,16 @@ public interface PatientRepository extends JpaRepository<Patient, Long> {
         a.street, a.number, a.complement, a.district, a.zipCode,
         c.name, s.name, co.name
     )
-    FROM Patient p
-    JOIN p.user u
-    JOIN u.gender g
-    LEFT JOIN Address a ON a.user = u
-    LEFT JOIN a.city c
-    LEFT JOIN c.state s
-    LEFT JOIN s.country co
-    WHERE p.user.id = :userId
-    AND a.id = (
-        SELECT MAX(a2.id) FROM Address a2 WHERE a2.user = u
-    )
-    """)
+    FROM User u
+    LEFT JOIN Patient p ON p.user = u
+    JOIN Gender g ON g.id = u.gender.id
+    LEFT JOIN Address a ON a.id = (SELECT MAX(a2.id) FROM Address a2 WHERE a2.user = u)
+    LEFT JOIN City c ON c.id = a.city.id
+    LEFT JOIN State s ON s.id = c.state.id
+    LEFT JOIN Country co ON co.id = s.country.id
+    WHERE u.id = :userId
+""")
     Optional<PatientDetailsDTO> findPatientDetailsByUserId(@Param("userId") UUID userId);
-
-
 }
 
 

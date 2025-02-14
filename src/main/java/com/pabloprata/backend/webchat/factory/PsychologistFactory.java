@@ -45,6 +45,11 @@ public class PsychologistFactory {
 
 
     public PsychologistCreatedDTO convertEntityToResponse(Psychologist psychologist) {
-        return new PsychologistCreatedDTO(psychologist.getUser().getId(), psychologist.getUser().getName(), psychologist.getCrp(), psychologist.getUser().getTelephone(), psychologist.getUser().getEmail());
+        return new PsychologistCreatedDTO(
+                psychologist.getUser().getId(),
+                psychologist.getUser().getName(),
+                psychologist.getCrp(),
+                psychologist.getUser().getTelephone(),
+                psychologist.getUser().getEmail());
     }
 }
